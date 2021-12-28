@@ -1,11 +1,11 @@
-# Transcriptome analysis pipeline from RNA-seq data (WIP)
+## Transcriptome analysis pipeline from RNA-seq data (WIP)
 
-## Feature
+### Feature
 + Support muliti aligner or pseudo-aligner
 + Support RNA-seq and scRNA-seq data analysis
 
 
-## Run
+### Run
 ```{bash}
 usage: rnapi [-h] [-v]  ...
 
