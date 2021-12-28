@@ -8,6 +8,10 @@ from rnapi.configer import custom_help_formatter
 from rnapi.sampler import parse_samples
 from rnapi.sampler import get_reads
 
+from rnapi.tooler import parse
+from rnapi.tooler import merge
+from rnapi.tooler import change
+
 from rnapi.__about__ import __version__, __author__
 
 name = "rnapi"
