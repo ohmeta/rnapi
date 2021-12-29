@@ -54,9 +54,9 @@ params:
     threads: 8
     star:
       do: True
-      quant_mode: "TranscriptomeSAM"   #"GeneCounts"
-      # TranscriptomeSAM: output SAM/BAM alignments to transcriptome into a separate file
-      # GeneCounts: count reads per gene
+      quant_mode:
+        TranscriptomeSAM: True # output SAM/BAM alignments to transcriptome into a separate file
+        GeneCounts: False # count reads per gene
 
 
 output:
