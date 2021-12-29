@@ -35,6 +35,7 @@ READS_FORMAT = "sra" \
 
 include: "../rules/raw.smk"
 include: "../rules/trimming.smk"
+include: "../rules/index.smk"
 include: "../rules/align.smk"
 
 

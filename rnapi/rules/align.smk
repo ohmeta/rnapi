@@ -5,36 +5,6 @@ def get_clean_reads(wildcards):
         return get_reads(wildcards, "raw")
 
 
-rule index_star:
-    input:
-        dna = config["reference"]["dna"],
-        gtf = config["reference"]["gtf"]
-    output:
-        directory(config["reference"]["index_star"])
-    threads:
-        config["params"]["align"]["threads"]
-    log:
-        os.path.join(config["output"]["align"], "logs/star_index_genome.log")
-    shell:
-        '''
-        mkdir -p {output}
-        pigz -dk {input.dna} > {output}/genome.fasta
-        pigz -dk {input.gtf} > {output}/genome.gtf
-
-        STAR \
-        --runMode genomeGenerate \
-        --runThreadN {threads} \
-        --genomeDir {output} \
-        --genomeFastaFiles {output}/genome.dna \
-        --sjdbGTFfile {output}/genome.gtf \
-        --sjdbOverhang 100 \
-        {log}
-
-        rm -rf {output}/genome.fasta
-        rm -rf {output}/genome.gtf
-        '''
-
-
 rule align_star:
     input:
         reads = get_clean_reads,
@@ -44,7 +14,8 @@ rule align_star:
         bam = os.path.join(config["output"]["align"], "star/{sample}/Aligned.sortedByCoord.out.bam"),
         tab = os.path.join(config["output"]["align"], "star/{sample}/ReadsPerGene.out.tab")
     params:
-        outprefix = os.path.join(config["output"]["align"], "star/{sample}")
+        outprefix = os.path.join(config["output"]["align"], "star/{sample}"),
+        quant_mode = config["params"]["align"]["star"]["quant_mode"]
     threads:
         config["params"]["align"]["threads"]
     log:
@@ -53,7 +24,7 @@ rule align_star:
         shell(
             '''
             STAR \
-            --quantMode GeneCounts \
+            --quantMode {params.quant_mode} \
             --sjdbGTFfile {input.gtf} \
             --runThreadN {threads} \
             --readFilesCommand zcat \
@@ -67,7 +38,7 @@ rule align_star:
 
 
 if config["params"]["align"]["star"]["do"]:
-    rule align_star_all:
+    rule align_genome_star_all:
         input:
             expand([
                 os.path.join(config["output"]["align"],
@@ -76,10 +47,10 @@ if config["params"]["align"]["star"]["do"]:
                              "star/{sample}/ReadsPerGene.out.tab")],
                    sample=SAMPLES.index.unique())
 else:
-    rule align_star_all:
+    rule align_genome_star_all:
         input:
 
 
 rule align_all:
     input:
-        rules.align_star_all.input
+        rules.align_genome_star_all.input
