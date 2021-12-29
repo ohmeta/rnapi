@@ -1,8 +1,8 @@
 def get_clean_reads(wildcards):
     if TRIMMING_DO:
-        return get_reads(wildcards, "trimming", False)
+        return get_reads(wildcards, "trimming")
     else:
-        return get_reads(wildcards, "raw", False)
+        return get_reads(wildcards, "raw")
 
 
 rule index_star:
@@ -25,8 +25,8 @@ rule index_star:
         --runMode genomeGenerate \
         --runThreadN {threads} \
         --genomeDir {output} \
-        --genomeFastaFiles {output/genome.dna} \
-        --sjdbGTFfile {output/genome.gtf} \
+        --genomeFastaFiles {output}/genome.dna \
+        --sjdbGTFfile {output}/genome.gtf \
         --sjdbOverhang 100 \
         {log}
 
@@ -81,4 +81,5 @@ else:
 
 
 rule align_all:
-    rules.align_star_all.input
+    input:
+        rules.align_star_all.input

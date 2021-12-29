@@ -1,0 +1,14 @@
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - star>=2.1.0
+  - seqkit>=2.1.0
+  - fastp>=0.23.2
+  - fastqc>=0.11.9
+  - pigz>=2.6
+  - ruamel.yaml>=0.16.6
+  - samtools>=1.9
+  - snakemake>=6.12.3
+  - multiqc>=1.11

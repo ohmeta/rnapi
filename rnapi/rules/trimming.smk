@@ -29,12 +29,7 @@ rule trimming_fastp:
             os.path.join(
                 config["output"]["trimming"],
                 "short_reads/{{sample}}/{{sample}}.trimming{read}.fq.gz"),
-            read=[".1", ".2"] if IS_PE else "") \
-            if config["params"]["trimming"]["save_reads"] else \
-               temp(expand(os.path.join(
-                   config["output"]["trimming"],
-                   "short_reads/{{sample}}/{{sample}}.trimming{read}.fq.gz"),
-                           read=[".1", ".2"] if IS_PE else ""))
+            read=[".1", ".2"] if IS_PE else "")
     params:
         output_prefix = os.path.join(config["output"]["trimming"],
                                      "short_reads/{sample}/{sample}"),

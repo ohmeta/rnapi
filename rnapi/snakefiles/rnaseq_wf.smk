@@ -22,10 +22,10 @@ TRIMMING_DO = True \
        else False
 
 
-SAMPLES = metapi.parse_samples(config["params"]["samples"],
-                               config["params"]["interleaved"],
-                               config["params"]["reads_layout"],
-                               config["params"]["begin"])
+SAMPLES = rnapi.parse_samples(config["params"]["samples"],
+                              config["params"]["interleaved"],
+                              config["params"]["reads_layout"],
+                              config["params"]["begin"])
 
 
 READS_FORMAT = "sra" \
