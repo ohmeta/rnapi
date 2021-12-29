@@ -16,6 +16,7 @@ RNASEQ_WF = [
     "trmming_all",
     "align_star_all",
     "align_hisat2_all",
+    "align_all",
     "pseudo_align_salmon_all",
     "pseudo_align_kallisto_all",
     "quantification_salmon_all",
