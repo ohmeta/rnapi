@@ -69,6 +69,7 @@ rule align_transcriptome_star:
 
 if config["params"]["align"]["star"]["do"]:
     if config["params"]["align"]["star"]["quant_mode"]["GeneCounts"]:
+        print("GeneCounts: Yes")
         rule align_genome_star_all:
             input:
                 expand([
@@ -83,13 +84,14 @@ if config["params"]["align"]["star"]["do"]:
 
 
     if config["params"]["align"]["star"]["quant_mode"]["TranscriptomeSAM"]:
+        print("TranscriptomeSAM: Yes")
         rule align_transcriptome_star_all:
             input:
                 expand([
                     os.path.join(config["output"]["align"],
                                  "star/transcriptome/{sample}/Aligned.sortedByCoord.out.bam"),
                     os.path.join(config["output"]["align"],
-                                 "star/transcriptome/{sample}/ReadsPerGene.out.tab")],
+                                 "star/transcriptome/{sample}/Aligned.toTranscriptome.out.bam")],
                        sample=SAMPLES.index.unique())
     else:
         rule align_transcriptome_star_all:
@@ -106,8 +108,8 @@ else:
 
 rule align_star_all:
     input:
-        rules.align_genome_star_all,
-        rules.align_transcriptome_star_all
+        rules.align_genome_star_all.input,
+        rules.align_transcriptome_star_all.input
 
 
 rule align_all:
