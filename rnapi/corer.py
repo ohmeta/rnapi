@@ -12,7 +12,12 @@ import pandas as pd
 import rnapi
 
 RNASEQ_WF = [
-    "raw_prepare_all",
+    "prepare_short_reads_all",
+    "raw_fastqc_all",
+    "raw_report_all",
+    "raw_all",
+    "trimming_fastp_all",
+    "trimming_report_all",
     "trmming_all",
     "align_star_all",
     "align_hisat2_all",

@@ -14,6 +14,13 @@ params:
   interleaved: False
   begin: "trimming"
 
+  raw:
+    threads: 8
+    save_reads: True
+    fastqc:
+      do: False
+
+
   trimming:
     fastp:
       do: True
@@ -36,14 +43,19 @@ params:
       length_required: 51
       n_base_limit: 5
 
+  qcreport:
+    do: True
+    seqkit:
+      threads: 4
+
   align:
     threads: 8
     star:
       do: True
 
 
-
 output:
   raw: "results/00.raw"
   trimming: "results/01.trimming"
-  align: "results/02.align"
+  qcreport: "results/02.qcreport"
+  align: "results/03.align"
