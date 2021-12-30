@@ -44,7 +44,7 @@ rule index_rsem:
         rsem-prepare-reference \
         --gtf {input.gtf} \
         --num-threads {threads} \
-        {output}/genome.fasta {output} \
+        {output}/genome.fasta {output}/ \
         > {log} 2>&1
 
         rm -rf {output}/genome.fasta
