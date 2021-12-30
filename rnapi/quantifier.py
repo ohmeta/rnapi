@@ -119,7 +119,7 @@ def parse_rsem_transcript_TPM(transcriptf):
         sys.exit(f"{transcriptf} is not exists")
 
 
-def parse_rsem_gene_FPKM(transcriptf):
+def parse_rsem_transcript_FPKM(transcriptf):
     sample_id = os.path.basename(os.path.dirname(transcriptf))
     if os.path.exists(transcriptf):
         try:
