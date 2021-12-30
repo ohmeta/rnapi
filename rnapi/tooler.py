@@ -37,7 +37,7 @@ def parse_gene_tab_init(strandedness):
     if pd.isnull(strandedness) or strandedness == "none" or strandedness == "":
         STAR_GENE_TAB_COLUMN__ = 1  # non stranded protocol
         print("Parsing gene tab: using column 2")
-    elif strandedness == "yes":
+    elif strandedness == "forward":
         STAR_GENE_TAB_COLUMN__ = 2  # 3rd column
         print("Parsing gene tab: using column 3")
     elif strandedness == "reverse":

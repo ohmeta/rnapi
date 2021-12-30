@@ -17,7 +17,7 @@ params:
   reads_layout: "pe"
   interleaved: False
   begin: "trimming"
-  strandedness: "reverse" # "", "yes", "reverse"
+  strandedness: "reverse" # "", "forward", "reverse"
 
   raw:
     threads: 8

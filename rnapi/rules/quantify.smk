@@ -40,6 +40,7 @@ rule quantify_transcript_star:
         stats_theta = os.path.join(config["output"]["quantify"],
                                    "star_transcript_counts/{sample}/{sample}.stat/{sample}.theta")
     params:
+        strandedness = config["params"]["strandedness"],
         index = config["reference"]["index_rsem"],
         outprefix = os.path.join(config["output"]["quantify"],
                                  "star_transcript_counts/{sample}/{sample}")
@@ -47,14 +48,31 @@ rule quantify_transcript_star:
         config["params"]["quantify"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/quantify_transcript_star/{sample}.log")
-    shell:
-        '''
-        rsem-calculate-expression \
-        --bam --no-bam-output \
-        -p {threads} --paired-end --forward-prob 0 \
-        {input.bam} {params.index} {params.outprefix} \
-        > {log} 2>&1
-        '''
+    run:
+        import pandas as pd
+
+        forward_prob  = 0
+        if pd.isnull(params.strandedness) or \
+           params.strandedness == "none" or \
+           params.strandedness == "":
+            forward_prob = 0.5  # non stranded protocol
+        elif strandedness == "forward":
+            forward_prob = 1
+        elif strandedness == "reverse":
+            forward_prob = 0
+        else:
+            sys.exit("strandedness is not right")
+
+        shell(
+            '''
+            rsem-calculate-expression \
+            --bam --no-bam-output \
+            -p {threads} \
+            --paired-end \
+            --forward-prob {forward_prob} \
+            {input.bam} {params.index} {params.outprefix} \
+            > {log} 2>&1
+            ''')
 
 
 if config["params"]["align"]["star"]["do"]:
