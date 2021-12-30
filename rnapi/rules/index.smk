@@ -11,7 +11,7 @@ rule index_star:
     shell:
         '''
         mkdir -p {output}
-        pigz -dk {input.dna} > {output}/genome.fasta
+        pigz -dkc {input.dna} > {output}/genome.fasta
 
         STAR \
         --runMode genomeGenerate \
@@ -39,7 +39,7 @@ rule index_rsem:
     shell:
         '''
         mkdir -p {output}
-        pigz -dk {input.dna} > {output}/genome.fasta
+        pigz -dkc {input.dna} > {output}/genome.fasta
 
         rsem-prepare-reference \
         --gtf {output}/genome.gtf \
