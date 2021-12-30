@@ -1,3 +1,18 @@
+# Reference
+# Dobin, A. and Gingeras, T.R. 2015. Mapping RNA-seq reads with STAR. Curr. Protoc. Bioinform. 51:11.14.1-11.14.19. doi: 10.1002/0471250953.bi1114s51
+#
+# Protocol list
+## 1. mapping RNA-seq reads to the reference genome
+## 2. mapping RNA-seq reads with 2-pass procedure
+## 3. mapping reads and generating unsorted and coordinate-sorted BAM files
+## 4. generating signal files for visualization on genome browsers for stranded RNA-seq data
+## 5. generating signal files for visualization on genome browsers for un-stranded RNA-seq data
+## 6. mapping RNA-seq reads and generating chimeric alignments to detect fusion transcripts and circular RNA
+## 7. mapping RNA-seq reads, generating output in transcriptomic coordinates and using RSEM to quantify expression of transcripts and genes
+## 8. mapping RNA-seq reads and running cufflinks to assemble and quantify transcripts for stranded RNA-seq data
+## 9. mapping RNA-seq reads and running cufflinks to assemble and quantify transcripts for un-stranded RNA-seq data
+
+
 def get_clean_reads(wildcards):
     if TRIMMING_DO:
         return get_reads(wildcards, "trimming")

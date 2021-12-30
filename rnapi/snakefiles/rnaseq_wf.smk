@@ -60,6 +60,6 @@ localrules: \
     align_transcriptome_star_all, \
     align_star_all, \
     align_all, \
-    quantify_genome_star_all, \
-    quantify_transcriptome_star_all, \
+    quantify_gene_star_all, \
+    quantify_transcript_star_all, \
     quantify_all

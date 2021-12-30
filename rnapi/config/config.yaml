@@ -9,7 +9,7 @@ reference:
   # gtf: /home/zhujie/databases/ensembl/release_104/gtf/homo_sapiens/Homo_sapiens.GRCh38.104.gtf
 
   index_star: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/dna_index/index_star
-  #index_genome_star: /home/zhujie/databases/ensembl/release_104/fasta/homo_sapiens/dna_index/index_star
+  index_rsem: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/dna_index/index_rsem
 
 params:
   samples: "samples.tsv"
