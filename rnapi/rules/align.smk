@@ -24,11 +24,16 @@ rule align_genome_star:
     input:
         reads = get_clean_reads,
         gtf = config["reference"]["gtf"],
-        index = config["reference"]["index_star"]
+        index = expand(os.path.join(config["reference"]["index_star"], "{file}"),
+                       file=["chrLength.txt", "chrName.txt", "chrNameLength.txt", "chrStart.txt",
+                             "exonGeTrInfo.tab", "exonInfo.tab", "geneInfo.tab",
+                             "Genome", "genomeParameters.txt", "SA", "SAindex", "sjdbInfo.txt",
+                             "sjdbList.fromGTF.out.tab", "sjdbList.out.tab", "transcriptInfo.tab"])
     output:
         align_bam = os.path.join(config["output"]["align"], "star/genome/{sample}/Aligned.sortedByCoord.out.bam"),
         gene_tab = os.path.join(config["output"]["align"], "star/genome/{sample}/ReadsPerGene.out.tab")
     params:
+        index = config["reference"]["index_star"],
         outprefix = os.path.join(config["output"]["align"], "star/genome/{sample}")
     threads:
         config["params"]["align"]["threads"]
@@ -42,7 +47,7 @@ rule align_genome_star:
             --sjdbGTFfile {input.gtf} \
             --runThreadN {threads} \
             --readFilesCommand zcat \
-            --genomeDir {input.index} \
+            --genomeDir {params.index} \
             --readFilesIn {input.reads} \
             --outFileNamePrefix {params.outprefix}/ \
             --outSAMtype BAM SortedByCoordinate \
@@ -55,11 +60,16 @@ rule align_transcriptome_star:
     input:
         reads = get_clean_reads,
         gtf = config["reference"]["gtf"],
-        index = config["reference"]["index_star"]
+        index = expand(os.path.join(config["reference"]["index_star"], "{file}"),
+                       file=["chrLength.txt", "chrName.txt", "chrNameLength.txt", "chrStart.txt",
+                             "exonGeTrInfo.tab", "exonInfo.tab", "geneInfo.tab",
+                             "Genome", "genomeParameters.txt", "SA", "SAindex", "sjdbInfo.txt",
+                             "sjdbList.fromGTF.out.tab", "sjdbList.out.tab", "transcriptInfo.tab"])
     output:
         align_bam = os.path.join(config["output"]["align"], "star/transcriptome/{sample}/Aligned.sortedByCoord.out.bam"),
         trans_bam = os.path.join(config["output"]["align"], "star/transcriptome/{sample}/Aligned.toTranscriptome.out.bam")
     params:
+        index = config["reference"]["index_star"],
         outprefix = os.path.join(config["output"]["align"], "star/transcriptome/{sample}")
     threads:
         config["params"]["align"]["threads"]
@@ -73,7 +83,7 @@ rule align_transcriptome_star:
             --sjdbGTFfile {input.gtf} \
             --runThreadN {threads} \
             --readFilesCommand zcat \
-            --genomeDir {input.index} \
+            --genomeDir {params.index} \
             --readFilesIn {input.reads} \
             --outFileNamePrefix {params.outprefix}/ \
             --outSAMtype BAM SortedByCoordinate \
