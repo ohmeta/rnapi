@@ -26,11 +26,23 @@ rule quantify_transcript_star:
             config["output"]["align"],
             "star/transcriptome/{sample}/Aligned.toTranscriptome.out.bam"),
         index = expand(config["reference"]["index_rsem"] + ".{suffix}",
-                       suffix=["chrlist", "grp", "idx.fa", "n2g.idx.fa", "seq", "ti", "transcripts.fa"])
+                       suffix=["chrlist", "grp", "idx.fa", "n2g.idx.fa",
+                               "seq", "ti", "transcripts.fa"])
     output:
-        directory(os.path.join(config["output"]["quantify"], "star_transcript_counts/{sample}"))
+        genes = os.path.join(config["output"]["quantify"],
+                             "star_transcript_counts/{sample}/{sample}.genes.results"),
+        isoforms = os.path.join(config["output"]["quantify"],
+                                "star_transcript_counts/{sample}/{sample}.isoforms.results"),
+        stats_cnt = os.path.join(config["output"]["quantify"],
+                                 "star_transcript_counts/{sample}/{sample}.stat/{sample}.cnt"),
+        stats_model = os.path.join(config["output"]["quantify"],
+                                   "star_transcript_counts/{sample}/{sample}.stat/{sample}.model"),
+        stats_theta = os.path.join(config["output"]["quantify"],
+                                   "star_transcript_counts/{sample}/{sample}.stat/{sample}.theta")
     params:
-        index = config["reference"]["index_rsem"]
+        index = config["reference"]["index_rsem"],
+        outprefix = os.path.join(config["output"]["quantify"],
+                                 "star_transcript_counts/{sample}/{sample}")
     threads:
         config["params"]["quantify"]["threads"]
     log:
@@ -40,7 +52,7 @@ rule quantify_transcript_star:
         rsem-calculate-expression \
         --bam --no-bam-output \
         -p {threads} --paired-end --forward-prob 0 \
-        {input.bam} {params.index} {output} \
+        {input.bam} {params.index} {params.outprefix} \
         > {log} 2>&1
         '''
 
@@ -57,7 +69,17 @@ if config["params"]["align"]["star"]["do"]:
     if config["params"]["align"]["star"]["quant_mode"]["TranscriptomeSAM"]:
         rule quantify_transcript_star_all:
             input:
-                expand(os.path.join(config["output"]["quantify"], "star_transcript_counts/{sample}"),
+                expand([
+                    os.path.join(config["output"]["quantify"],
+                                 "star_transcript_counts/{sample}/{sample}.genes.results"),
+                    os.path.join(config["output"]["quantify"],
+                                 "star_transcript_counts/{sample}/{sample}.isoforms.results"),
+                    os.path.join(config["output"]["quantify"],
+                                 "star_transcript_counts/{sample}/{sample}.stat/{sample}.cnt"),
+                    os.path.join(config["output"]["quantify"],
+                                 "star_transcript_counts/{sample}/{sample}.stat/{sample}.model"),
+                    os.path.join(config["output"]["quantify"],
+                                 "star_transcript_counts/{sample}/{sample}.stat/{sample}.theta")],
                        sample=SAMPLES.index.unique())
     else:
         rule quantify_transcript_star_all:
