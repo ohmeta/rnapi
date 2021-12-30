@@ -10,6 +10,7 @@ from rnapi.sampler import get_reads
 
 from rnapi.tooler import parse
 from rnapi.tooler import merge
+from rnapi.tooler import merge_cols
 from rnapi.tooler import change
 
 from rnapi.__about__ import __version__, __author__

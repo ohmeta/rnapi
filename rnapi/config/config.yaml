@@ -17,6 +17,7 @@ params:
   reads_layout: "pe"
   interleaved: False
   begin: "trimming"
+  strandedness: "reverse" # "", "yes", "reverse"
 
   raw:
     threads: 8
@@ -60,6 +61,9 @@ params:
         # output SAM/BAM alignments to transcriptome into a separate file
         GeneCounts: False
         # count reads per gene
+
+  quantify:
+    threads: 32
 
 
 output:

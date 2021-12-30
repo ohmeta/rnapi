@@ -43,6 +43,20 @@ def merge(input_list, func, workers, **kwargs):
     return df_
 
 
+def merge_cols(input_list, func, workers, **kwargs):
+    df_list = []
+    with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as executor:
+        for df in executor.map(func, input_list):
+            if df is not None:
+                df_list.append(df)
+
+    df_ = pd.concat(df_list, axis=1)
+
+    if "output" in kwargs:
+        df_.to_csv(kwargs["output"], sep="\t", index=False)
+    return df_
+
+
 def merge2(input_list, func, workers, **kwargs):
     df1_list = []
     df2_list = []

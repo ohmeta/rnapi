@@ -24,6 +24,8 @@ RNASEQ_WF = [
     "align_star_all",
     "align_hisat2_all",
     "align_all",
+    "quantify_genome_star_all",
+    "quantify_all",
     "pseudo_align_salmon_all",
     "pseudo_align_kallisto_all",
     "quantification_salmon_all",
