@@ -20,6 +20,14 @@ rule quantify_gene_star:
         count_df.reset_index().to_csv(output[0], sep="\t", index=False)
 
 
+# RSEM has the ability to produce both gene and isoform-level expression estimates.
+# However, accurate isoform level expression is typically much more challenging than gene-level estimation,
+# and isoform-level estimates are far noisier.
+#
+# These are tab-delimited files and contain expression estimates for each
+# isoform ("transcript_id") or gene ("gene_id") as "expected_count", and also
+# as TPM (Transcripts Per Million) and FPKM (Fragments Per Kilobase of transcript per Million mapped reads) numbers.
+
 rule quantify_transcript_star:
     input:
         bam = os.path.join(
@@ -57,9 +65,9 @@ rule quantify_transcript_star:
            params.strandedness == "":
             forward_prob = 0.5  # non stranded protocol
         elif strandedness == "forward":
-            forward_prob = 1
+            forward_prob = 1 # for ligation-stranded protocols
         elif strandedness == "reverse":
-            forward_prob = 0
+            forward_prob = 0 # for dUTP libraries
         else:
             sys.exit("strandedness is not right")
 
@@ -75,6 +83,35 @@ rule quantify_transcript_star:
             ''')
 
 
+rule quantify_transcript_star_merge:
+    input:
+        genes = expand(os.path.join(config["output"]["quantify"],
+                             "star_transcript_counts/{sample}/{sample}.genes.results"),
+                       sample=SAMPLES.index.unique()),
+        transcripts = expand(os.path.join(config["output"]["quantify"],
+                                          "star_transcript_counts/{sample}/{sample}.isoforms.results"),
+                             sample=SAMPLES.index.unique())
+    output:
+        gene_tpm = os.path.join(config["output"]["quantify"], "star_gene_counts_TPM.tsv"),
+        gene_fpkm = os.path.join(config["output"]["quantify"], "star_gene_counts_FPKM.tsv"),
+        transcript_tpm = os.path.join(config["output"]["quantify"], "star_transcript_counts_TPM.tsv"),
+        transcript_fpkm = os.path.join(config["output"]["quantify"], "star_transcript_counts_FPKM.tsv")
+    threads:
+        config["params"]["quantify"]["threads"]
+    run:
+        import numpy as np
+
+        def save_df(input_list, func, outf):
+            df = rnapi.merge_cols(input_list, func, threads).fillna(0)
+            df = df[df.apply(np.sum, axis=1)>0]
+            df.reset_index().to_csv(outf, sep="\t", index=False)
+
+        save_df(input.genes, rnapi.parse_rsem_gene_TPM, output.gene_tpm)
+        save_df(input.genes, rnapi.parse_rsem_gene_FPKM, output.gene_fpkm)
+        save_df(input.transcripts, rnapi.parse_rsem_transcript_TPM, output.transcript_tpm)
+        save_df(input.transcripts, rnapi.parse_rsem_transcript_FPKM, output.transcript_fpkm)
+
+
 if config["params"]["align"]["star"]["do"]:
     if config["params"]["align"]["star"]["quant_mode"]["GeneCounts"]:
         rule quantify_gene_star_all:
@@ -87,18 +124,10 @@ if config["params"]["align"]["star"]["do"]:
     if config["params"]["align"]["star"]["quant_mode"]["TranscriptomeSAM"]:
         rule quantify_transcript_star_all:
             input:
-                expand([
-                    os.path.join(config["output"]["quantify"],
-                                 "star_transcript_counts/{sample}/{sample}.genes.results"),
-                    os.path.join(config["output"]["quantify"],
-                                 "star_transcript_counts/{sample}/{sample}.isoforms.results"),
-                    os.path.join(config["output"]["quantify"],
-                                 "star_transcript_counts/{sample}/{sample}.stat/{sample}.cnt"),
-                    os.path.join(config["output"]["quantify"],
-                                 "star_transcript_counts/{sample}/{sample}.stat/{sample}.model"),
-                    os.path.join(config["output"]["quantify"],
-                                 "star_transcript_counts/{sample}/{sample}.stat/{sample}.theta")],
-                       sample=SAMPLES.index.unique())
+                os.path.join(config["output"]["quantify"], "star_gene_counts_TPM.tsv"),
+                os.path.join(config["output"]["quantify"], "star_gene_counts_FPKM.tsv"),
+                os.path.join(config["output"]["quantify"], "star_transcript_counts_TPM.tsv"),
+                os.path.join(config["output"]["quantify"], "star_transcript_counts_FPKM.tsv")
     else:
         rule quantify_transcript_star_all:
             input:
