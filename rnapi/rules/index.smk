@@ -31,7 +31,10 @@ rule index_rsem:
         dna = config["reference"]["dna"],
         gtf = config["reference"]["gtf"]
     output:
-        directory(config["reference"]["index_rsem"])
+        expand(config["reference"]["index_rsem"] + ".{suffix}",
+               suffix=["chrlist", "grp", "idx.fa", "n2g.idx.fa", "seq", "ti", "transcripts.fa"])
+    params:
+        outprefix = config["reference"]["index_rsem"]
     threads:
         config["params"]["align"]["threads"]
     log:
@@ -39,13 +42,13 @@ rule index_rsem:
     shell:
         '''
         mkdir -p {output}
-        pigz -dkc {input.dna} > {output}/genome.fasta
+        pigz -dkc {input.dna} > {params.outprefix}.fasta
 
         rsem-prepare-reference \
         --gtf {input.gtf} \
         --num-threads {threads} \
-        {output}/genome.fasta {output} \
+        {params.outprefix}.fasta {params.outprefix} \
         > {log} 2>&1
 
-        rm -rf {output}/genome.fasta
+        rm -rf {params.outprefix}.fasta
         '''

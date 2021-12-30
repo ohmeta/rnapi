@@ -25,9 +25,12 @@ rule quantify_transcript_star:
         bam = os.path.join(
             config["output"]["align"],
             "star/transcriptome/{sample}/Aligned.toTranscriptome.out.bam"),
-        index = config["reference"]["index_rsem"]
+        index = expand(config["reference"]["index_rsem"] + ".{suffix}",
+                       suffix=["chrlist", "grp", "idx.fa", "n2g.idx.fa", "seq", "ti", "transcripts.fa"])
     output:
         directory(os.path.join(config["output"]["quantify"], "star_transcript_counts/{sample}"))
+    params:
+        index = config["reference"]["index_rsem"]
     threads:
         config["params"]["quantify"]["threads"]
     log:
@@ -37,7 +40,7 @@ rule quantify_transcript_star:
         rsem-calculate-expression \
         --bam --no-bam-output \
         -p {threads} --paired-end --forward-prob 0 \
-        {input.bam} {input.index} {output} \
+        {input.bam} {params.index} {output} \
         > {log} 2>&1
         '''
 
