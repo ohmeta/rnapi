@@ -17,8 +17,8 @@ rule index_star:
         --runMode genomeGenerate \
         --runThreadN {threads} \
         --genomeDir {output} \
-        --genomeFastaFiles {output}/genome.dna \
-        --sjdbGTFfile {output}/genome.gtf \
+        --genomeFastaFiles {output}/genome.fasta \
+        --sjdbGTFfile {input.gtf} \
         --sjdbOverhang 100 \
         {log}
 
@@ -42,7 +42,7 @@ rule index_rsem:
         pigz -dkc {input.dna} > {output}/genome.fasta
 
         rsem-prepare-reference \
-        --gtf {output}/genome.gtf \
+        --gtf {input.gtf} \
         {output}/genome.fasta {output} \
         > {log} 2>&1
 
