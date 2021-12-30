@@ -71,6 +71,7 @@ output:
   trimming: "results/01.trimming"
   qcreport: "results/02.qcreport"
   align: "results/03.align"
+  quantify: "results/04.quantify"
 
 
 envs:

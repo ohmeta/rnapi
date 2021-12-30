@@ -37,13 +37,15 @@ include: "../rules/raw.smk"
 include: "../rules/trimming.smk"
 include: "../rules/index.smk"
 include: "../rules/align.smk"
+include: "../rules/quantify.smk"
 
 
 rule all:
     input:
         rules.raw_all.input,
         rules.trimming_all.input,
-        rules.align_all.input
+        rules.align_all.input,
+        rules.quantify_all.input
 
 
 localrules: \
@@ -54,5 +56,10 @@ localrules: \
     trimming_fastp_all, \
     trimming_report_all, \
     trimming_all, \
+    align_genome_star_all, \
+    align_transcriptome_star_all, \
     align_star_all, \
-    align_all
+    align_all, \
+    quantify_genome_star_all, \
+    quantify_transcriptome_star_all, \
+    quantify_all
