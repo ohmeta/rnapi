@@ -8,8 +8,8 @@ reference:
   gtf: /home/zhujie/databases/ensembl/release_104/gtf/mus_musculus/Mus_musculus.GRCm39.104.gtf
   # gtf: /home/zhujie/databases/ensembl/release_104/gtf/homo_sapiens/Homo_sapiens.GRCh38.104.gtf
 
-  index_star: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/dna_index/index_star
-  index_rsem: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/dna_index/index_rsem
+  index_star: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/dna_index/index_star # directory
+  index_rsem: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/dna_index/index_rsem/mus_musculus # index prefix
 
 params:
   samples: "samples.tsv"
