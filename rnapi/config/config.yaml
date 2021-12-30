@@ -65,6 +65,7 @@ params:
 
   quantify:
     salmon:
+      kmer_len: 31
     threads: 32
 
 
