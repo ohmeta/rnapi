@@ -65,7 +65,10 @@ params:
 
   quantify:
     salmon:
+      do: True
       kmer_len: 31
+      lib_type: "A" # To allow Salmon to automatically infer the library type, simply provide -l A or --libType A to Salmon
+      extra: "--gcBias"
     threads: 32
 
 

@@ -19,6 +19,8 @@ from rnapi.quantifier import parse_rsem_gene_TPM
 from rnapi.quantifier import parse_rsem_gene_FPKM
 from rnapi.quantifier import parse_rsem_transcript_TPM
 from rnapi.quantifier import parse_rsem_transcript_FPKM
+from rnapi.quantifier import parse_salmon_TPM
+from rnapi.quantifier import parse_salmon_count
 
 from rnapi.__about__ import __version__, __author__
 

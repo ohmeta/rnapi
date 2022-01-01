@@ -4,10 +4,7 @@ rule index_star:
         gtf = config["reference"]["gtf"]
     output:
         expand(os.path.join(config["reference"]["index_star"], "{file}"),
-               file=["chrLength.txt", "chrName.txt", "chrNameLength.txt", "chrStart.txt",
-                     "exonGeTrInfo.tab", "exonInfo.tab", "geneInfo.tab",
-                     "Genome", "genomeParameters.txt", "SA", "SAindex", "sjdbInfo.txt",
-                     "sjdbList.fromGTF.out.tab", "sjdbList.out.tab", "transcriptInfo.tab"])
+               file=["Genome",  "SA", "SAindex"])
     params:
         index = config["reference"]["index_star"]
     threads:
@@ -68,8 +65,7 @@ rule index_salmon:
         expand(os.path.join(config["reference"]["index_salmon"], "{file}"),
                file=["complete_ref_lens.bin", "ctable.bin", "ctg_offsets.bin",
                      "mphf.bin", "pos.bin", "rank.bin", "refAccumLengths.bin",
-                     "reflengths.bin", "refseq.bin", "seq.bin",
-                     "info.json", "versionInfo.json"])
+                     "reflengths.bin", "refseq.bin", "seq.bin"])
     params:
         index = config["reference"]["index_salmon"],
         kmer_len = config["params"]["quantify"]["salmon"]["kmer_len"]

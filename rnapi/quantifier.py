@@ -141,3 +141,51 @@ def parse_rsem_transcript_FPKM(transcriptf):
             return None
     else:
         sys.exit(f"{transcriptf} is not exists")
+
+
+def parse_salmon_TPM(qf):
+    sample_id = os.path.basename(os.path.dirname(qf))
+    if os.path.exists(qf):
+        try:
+            df = pd.read_csv(
+                qf,
+                usecols=[0, 3],
+                header=0,
+                names=["id", sample_id],
+                sep="\t",
+            ).set_index("id")
+        except pd.errors.EmptyDataError:
+            print(f"{qf} is empty, please check")
+            return None
+
+        if not df.empty:
+            return df
+        else:
+            print(f"{qf} is empty, please check")
+            return None
+    else:
+        sys.exit(f"{qf} is not exists")
+
+
+def parse_salmon_count(qf):
+    sample_id = os.path.basename(os.path.dirname(qf))
+    if os.path.exists(qf):
+        try:
+            df = pd.read_csv(
+                qf,
+                usecols=[0, 4],
+                header=0,
+                names=["id", sample_id],
+                sep="\t",
+            ).set_index("id")
+        except pd.errors.EmptyDataError:
+            print(f"{qf} is empty, please check")
+            return None
+
+        if not df.empty:
+            return df
+        else:
+            print(f"{qf} is empty, please check")
+            return None
+    else:
+        sys.exit(f"{qf} is not exists")

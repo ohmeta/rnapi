@@ -25,10 +25,7 @@ rule align_genome_star:
         reads = get_clean_reads,
         gtf = config["reference"]["gtf"],
         index = expand(os.path.join(config["reference"]["index_star"], "{file}"),
-                       file=["chrLength.txt", "chrName.txt", "chrNameLength.txt", "chrStart.txt",
-                             "exonGeTrInfo.tab", "exonInfo.tab", "geneInfo.tab",
-                             "Genome", "genomeParameters.txt", "SA", "SAindex", "sjdbInfo.txt",
-                             "sjdbList.fromGTF.out.tab", "sjdbList.out.tab", "transcriptInfo.tab"])
+                       file=["Genome", "SA", "SAindex"])
     output:
         align_bam = os.path.join(config["output"]["align"], "star/genome/{sample}/Aligned.sortedByCoord.out.bam"),
         gene_tab = os.path.join(config["output"]["align"], "star/genome/{sample}/ReadsPerGene.out.tab")
@@ -61,13 +58,12 @@ rule align_transcriptome_star:
         reads = get_clean_reads,
         gtf = config["reference"]["gtf"],
         index = expand(os.path.join(config["reference"]["index_star"], "{file}"),
-                       file=["chrLength.txt", "chrName.txt", "chrNameLength.txt", "chrStart.txt",
-                             "exonGeTrInfo.tab", "exonInfo.tab", "geneInfo.tab",
-                             "Genome", "genomeParameters.txt", "SA", "SAindex", "sjdbInfo.txt",
-                             "sjdbList.fromGTF.out.tab", "sjdbList.out.tab", "transcriptInfo.tab"])
+                       file=["Genome", "SA", "SAindex"])
     output:
-        align_bam = os.path.join(config["output"]["align"], "star/transcriptome/{sample}/Aligned.sortedByCoord.out.bam"),
-        trans_bam = os.path.join(config["output"]["align"], "star/transcriptome/{sample}/Aligned.toTranscriptome.out.bam")
+        align_bam = os.path.join(config["output"]["align"],
+                                 "star/transcriptome/{sample}/Aligned.sortedByCoord.out.bam"),
+        trans_bam = os.path.join(config["output"]["align"],
+                                 "star/transcriptome/{sample}/Aligned.toTranscriptome.out.bam")
     params:
         index = config["reference"]["index_star"],
         outprefix = os.path.join(config["output"]["align"], "star/transcriptome/{sample}")
