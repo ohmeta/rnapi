@@ -188,7 +188,7 @@ rule quantify_salmon_merge:
     run:
         import numpy as np
 
-        def quant_merger(input_list, func, outf):
+        def quant_merger(input_list, func):
             df = rnapi.merge_cols(input_list, func, threads).fillna(0)
             df = df[df.apply(np.sum, axis=1)>0]
             return df.reset_index()
