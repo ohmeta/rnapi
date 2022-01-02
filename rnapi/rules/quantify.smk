@@ -203,11 +203,11 @@ rule quantify_salmon_merge:
 
         quant_merger(input.transcripts, rnapi.parse_salmon_TPM)\
             .rename(columns={"Name": "transcript_id"})\
-            .to_csv(output.transcripts_tpm, sep="\t", index=False)
+            .to_csv(output.transcript_tpm, sep="\t", index=False)
 
         quant_merger(input.transcripts, rnapi.parse_salmon_count)\
             .rename(columns={"Name": "transcript_id"})\
-            .to_csv(output.transcripts_count, sep="\t", index=False)
+            .to_csv(output.transcript_count, sep="\t", index=False)
 
 
 if config["params"]["quantify"]["salmon"]["do"]:
