@@ -194,19 +194,19 @@ rule quantify_salmon_merge:
             return df.reset_index()
 
         quant_merger(input.genes, rnapi.parse_salmon_TPM)\
-            .rename(column={"Name": "gene_id"})\
+            .rename(columns={"Name": "gene_id"})\
             .to_csv(output.gene_tpm, sep="\t", index=False)
 
         quant_merger(input.genes, rnapi.parse_salmon_count)\
-            .rename(column={"Name": "gene_id"})\
+            .rename(columns={"Name": "gene_id"})\
             .to_csv(output.gene_count, sep="\t", index=False)
 
         quant_merger(input.transcripts, rnapi.parse_salmon_TPM)\
-            .rename(column={"Name": "transcript_id"})\
+            .rename(columns={"Name": "transcript_id"})\
             .to_csv(output.transcripts_tpm, sep="\t", index=False)
 
         quant_merger(input.transcripts, rnapi.parse_salmon_count)\
-            .rename(column={"Name": "transcript_id"})\
+            .rename(columns={"Name": "transcript_id"})\
             .to_csv(output.transcripts_count, sep="\t", index=False)
 
 
