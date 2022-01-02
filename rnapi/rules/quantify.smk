@@ -182,7 +182,7 @@ rule quantify_salmon_merge:
         gene_count = os.path.join(config["output"]["quantify"], "salmon_gene_counts.tsv"),
         gene_tpm = os.path.join(config["output"]["quantify"], "salmon_gene_counts_TPM.tsv"),
         transcript_count = os.path.join(config["output"]["quantify"], "salmon_transcript_counts.tsv"),
-        transcript_tpm = os.path.join(config["output"]["quantify"], "salmon_transcript_counts_tpm.tsv")
+        transcript_tpm = os.path.join(config["output"]["quantify"], "salmon_transcript_counts_TPM.tsv")
     threads:
         config["params"]["quantify"]["threads"]
     run:
