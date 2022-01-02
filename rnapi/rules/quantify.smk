@@ -200,7 +200,7 @@ if config["params"]["quantify"]["salmon"]["do"]:
     rule quantify_salmon_all:
         input:
             os.path.join(config["output"]["quantify"], "salmon_transcript_counts.tsv"),
-            os.path.join(config["output"]["quantify"], "salmon_transcript_counts_tpm.tsv")
+            os.path.join(config["output"]["quantify"], "salmon_transcript_counts_TPM.tsv")
 
 else:
     rule quantify_salmon_all:
