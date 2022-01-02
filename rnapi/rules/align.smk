@@ -90,7 +90,6 @@ rule align_transcriptome_star:
 
 if config["params"]["align"]["star"]["do"]:
     if config["params"]["align"]["star"]["quant_mode"]["GeneCounts"]:
-        print("GeneCounts: Yes")
         rule align_genome_star_all:
             input:
                 expand([
@@ -105,7 +104,6 @@ if config["params"]["align"]["star"]["do"]:
 
 
     if config["params"]["align"]["star"]["quant_mode"]["TranscriptomeSAM"]:
-        print("TranscriptomeSAM: Yes")
         rule align_transcriptome_star_all:
             input:
                 expand([
