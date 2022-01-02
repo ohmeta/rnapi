@@ -13,14 +13,14 @@ rule index_star:
         os.path.join(config["output"]["align"], "logs/index_star.log")
     shell:
         '''
-        mkdir -p {params.outdir}
-        pigz -dkc {input.dna} > {params.outdir}/genome.fasta
+        mkdir -p {params.index}
+        pigz -dkc {input.dna} > {params.index}/genome.fasta
 
         STAR \
         --runMode genomeGenerate \
         --runThreadN {threads} \
         --genomeDir {params.index} \
-        --genomeFastaFiles {params.outdir}/genome.fasta \
+        --genomeFastaFiles {params.index}/genome.fasta \
         --sjdbGTFfile {input.gtf} \
         --sjdbOverhang 100 \
         > {log} 2>&1
@@ -43,19 +43,22 @@ rule index_rsem:
         config["params"]["align"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/index_rsem.log")
-    shell:
-        '''
-        mkdir -p {output}
-        pigz -dkc {input.dna} > {params.outprefix}.fasta
+    run:
+        outdir = os.path.dirname(params.outprefix)
 
-        rsem-prepare-reference \
-        --gtf {input.gtf} \
-        --num-threads {threads} \
-        {params.outprefix}.fasta {params.outprefix} \
-        > {log} 2>&1
+        shell(
+            '''
+            mkdir -p {outdir}
+            pigz -dkc {input.dna} > {params.outprefix}.fasta
 
-        rm -rf {params.outprefix}.fasta
-        '''
+            rsem-prepare-reference \
+            --gtf {input.gtf} \
+            --num-threads {threads} \
+            {params.outprefix}.fasta {params.outprefix} \
+            > {log} 2>&1
+
+            rm -rf {params.outprefix}.fasta
+            ''')
 
 
 rule index_salmon:
@@ -76,6 +79,8 @@ rule index_salmon:
     log:
         os.path.join(config["output"]["align"], "logs/index_salmon.log")
     run:
+        shell('''mkdir -p {params.index}''')
+
         if not params.index_add_genome:
             shell(
                 '''
