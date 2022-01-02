@@ -1,6 +1,6 @@
 ## Transcriptome analysis pipeline from RNA-seq data (WIP)
 
-<div align=center><img width="500" height="280" src="docs/dag.svg"/></div>
+<div align=center><img width="500" height="500" src="docs/dag.svg"/></div>
 
 ### Feature
 + Support multi aligner or pseudo-aligner
