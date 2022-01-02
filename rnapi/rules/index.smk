@@ -25,7 +25,7 @@ rule index_star:
         --sjdbOverhang 100 \
         > {log} 2>&1
 
-        rm -rf {params.outdir}/genome.fasta
+        rm -rf {params.index}/genome.fasta
         '''
 
 
