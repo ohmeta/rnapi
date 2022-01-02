@@ -149,7 +149,6 @@ rule quantify_salmon:
                              "mphf.bin", "pos.bin", "rank.bin", "refAccumLengths.bin",
                              "reflengths.bin", "refseq.bin", "seq.bin"])
     output:
-        gene_qf = os.path.join(config["output"]["quantify"], "salmon/{sample}/quant.genes.sf"),
         transcript_qf = os.path.join(config["output"]["quantify"], "salmon/{sample}/quant.sf")
     params:
         index = config["reference"]["index_salmon"],
@@ -162,7 +161,6 @@ rule quantify_salmon:
         '''
         salmon quant \
         --index {params.index} \
-        --geneMap {input.gtf} \
         --libType {params.lib_type} \
         -1 {input.reads[0]} \
         -2 {input.reads[1]} \
@@ -174,13 +172,9 @@ rule quantify_salmon:
 
 rule quantify_salmon_merge:
     input:
-        genes = expand(os.path.join(config["output"]["quantify"], "salmon/{sample}/quant.genes.sf"),
-                       sample=SAMPLES.index.unique()),
         transcripts = expand(os.path.join(config["output"]["quantify"], "salmon/{sample}/quant.sf"),
                              sample=SAMPLES.index.unique())
     output:
-        gene_count = os.path.join(config["output"]["quantify"], "salmon_gene_counts.tsv"),
-        gene_tpm = os.path.join(config["output"]["quantify"], "salmon_gene_counts_TPM.tsv"),
         transcript_count = os.path.join(config["output"]["quantify"], "salmon_transcript_counts.tsv"),
         transcript_tpm = os.path.join(config["output"]["quantify"], "salmon_transcript_counts_TPM.tsv")
     threads:
@@ -192,14 +186,6 @@ rule quantify_salmon_merge:
             df = rnapi.merge_cols(input_list, func, threads).fillna(0)
             df = df[df.apply(np.sum, axis=1)>0]
             return df.reset_index()
-
-        quant_merger(input.genes, rnapi.parse_salmon_TPM)\
-            .rename(columns={"Name": "gene_id"})\
-            .to_csv(output.gene_tpm, sep="\t", index=False)
-
-        quant_merger(input.genes, rnapi.parse_salmon_count)\
-            .rename(columns={"Name": "gene_id"})\
-            .to_csv(output.gene_count, sep="\t", index=False)
 
         quant_merger(input.transcripts, rnapi.parse_salmon_TPM)\
             .rename(columns={"Name": "transcript_id"})\
@@ -213,8 +199,6 @@ rule quantify_salmon_merge:
 if config["params"]["quantify"]["salmon"]["do"]:
     rule quantify_salmon_all:
         input:
-            os.path.join(config["output"]["quantify"], "salmon_gene_counts.tsv"),
-            os.path.join(config["output"]["quantify"], "salmon_gene_counts_TPM.tsv"),
             os.path.join(config["output"]["quantify"], "salmon_transcript_counts.tsv"),
             os.path.join(config["output"]["quantify"], "salmon_transcript_counts_tpm.tsv")
 

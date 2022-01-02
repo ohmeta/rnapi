@@ -64,12 +64,13 @@ params:
         # count reads per gene
 
   quantify:
+    threads: 32
     salmon:
       do: True
+      index_add_genome: False
       kmer_len: 31
       lib_type: "A" # To allow Salmon to automatically infer the library type, simply provide -l A or --libType A to Salmon
       extra: "--gcBias"
-    threads: 32
 
 
 output:

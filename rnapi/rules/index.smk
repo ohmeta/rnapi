@@ -60,6 +60,7 @@ rule index_rsem:
 
 rule index_salmon:
     input:
+        dna = config["reference"]["dna"],
         cdna = config["reference"]["cdna"]
     output:
         expand(os.path.join(config["reference"]["index_salmon"], "{file}"),
@@ -68,17 +69,34 @@ rule index_salmon:
                      "reflengths.bin", "refseq.bin", "seq.bin"])
     params:
         index = config["reference"]["index_salmon"],
-        kmer_len = config["params"]["quantify"]["salmon"]["kmer_len"]
+        kmer_len = config["params"]["quantify"]["salmon"]["kmer_len"],
+        index_add_genome = config["params"]["quantify"]["salmon"]["index_add_genome"]
     threads:
         config["params"]["align"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/index_salmon.log")
-    shell:
-        '''
-        salmon index \
-        --transcripts {input.cdna} \
-        --index {params.index} \
-        --kmerLen {params.kmer_len} \
-        --threads {threads} \
-        > {log} 2>&1
-        '''
+    run:
+        if not params.index_add_genome:
+            shell(
+                '''
+                salmon index \
+                --transcripts {input.cdna} \
+                --index {params.index} \
+                --kmerLen {params.kmer_len} \
+                --threads {threads} \
+                > {log} 2>&1
+                ''')
+        else:
+            shell(
+                '''
+                zcat {input.dna} | grep "^>" | awk -F'[> ]' '{{print $2}}' > {params.index}.decoys.txt
+                zcat {input.dna} {input.cdna} > {params.index}.gentrome.fa.gz
+
+                salmon index \
+                --transcripts {params.index}.gentrome.fa.gz \
+                --decoys {params.index}.decoys.txt \
+                --index {params.index} \
+                --kmerLen {params.kmer_len} \
+                --threads {threads} \
+                > {log} 2>&1
+                ''')
