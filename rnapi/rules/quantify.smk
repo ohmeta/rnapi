@@ -188,11 +188,11 @@ rule quantify_salmon_merge:
             return df.reset_index()
 
         quant_merger(input.transcripts, rnapi.parse_salmon_TPM)\
-            .rename(columns={"transcript": "id"})\
+            .rename(columns={"id": "transcript_id"})\
             .to_csv(output.transcript_tpm, sep="\t", index=False)
 
         quant_merger(input.transcripts, rnapi.parse_salmon_count)\
-            .rename(columns={"transcript": "id"})\
+            .rename(columns={"id": "transcript_id"})\
             .to_csv(output.transcript_count, sep="\t", index=False)
 
 
