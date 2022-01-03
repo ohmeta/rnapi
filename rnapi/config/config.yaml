@@ -14,7 +14,8 @@ reference:
 
   index_star: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/dna_index/index_star # index directory
   index_rsem: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/dna_index/index_rsem/mus_musculus # index prefix
-  index_salmon: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/cdna_index/index_salmon # index directory
+  # index_salmon: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/cdna_index/index_salmon # index directory
+  index_salmon: /home/zhujie/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M28/index_salmon # index directory
 
 params:
   samples: "samples.tsv"
