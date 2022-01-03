@@ -63,8 +63,8 @@ rule index_rsem:
 
 rule index_salmon:
     input:
-        dna = config["reference"]["dna"],
-        cdna = config["reference"]["cdna"]
+        dna = config["reference"]["dna_gencode"],
+        cdna = config["reference"]["cdna_gencode"]
     output:
         expand(os.path.join(config["reference"]["index_salmon"], "{file}"),
                file=["complete_ref_lens.bin", "ctable.bin", "ctg_offsets.bin",
@@ -94,12 +94,12 @@ rule index_salmon:
         else:
             shell(
                 '''
-                zcat {input.dna} | grep "^>" | awk -F'[> ]' '{{print $2}}' > {params.index}.decoys.txt
-                zcat {input.dna} {input.cdna} > {params.index}.gentrome.fa.gz
+                zcat {input.dna} | grep "^>" | awk -F'[> ]' '{{print $2}}' > {params.index}/decoys.txt
+                zcat {input.cdna} {input.dna} > {params.index}/gentrome.fa.gz
 
                 salmon index \
-                --transcripts {params.index}.gentrome.fa.gz \
-                --decoys {params.index}.decoys.txt \
+                --transcripts {params.index}/gentrome.fa.gz \
+                --decoys {params.index}/decoys.txt \
                 --index {params.index} \
                 --kmerLen {params.kmer_len} \
                 --threads {threads} \

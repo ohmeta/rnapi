@@ -1,9 +1,13 @@
 reference:
   dna: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
   # dna: /home/zhujie/databases/ensembl/release_104/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
+  dna_gencode: /home/zhujie/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M28/GRCm39.primary_assembly.genome.fa.gz
+  # dna_gencode: /home/zhujie/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_39/GRCh38.primary_assembly.genome.fa.gz
 
   cdna: /home/zhujie/databases/ensembl/release_104/fasta/mus_musculus/cdna/Mus_musculus.GRCm39.cdna.all.fa.gz
   # cdna: /home/zhujie/databases/ensembl/release_104/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz
+  cdna_gencode: /home/zhujie/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M28/gencode.vM28.transcripts.fa.gz
+  # cdna_gencode: /home/zhujie/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_39/gencode.v39.transcripts.fa.gz
 
   gtf: /home/zhujie/databases/ensembl/release_104/gtf/mus_musculus/Mus_musculus.GRCm39.104.gtf
   # gtf: /home/zhujie/databases/ensembl/release_104/gtf/homo_sapiens/Homo_sapiens.GRCh38.104.gtf
@@ -67,7 +71,7 @@ params:
     threads: 32
     salmon:
       do: True
-      index_add_genome: False
+      index_add_genome: True
       kmer_len: 31
       lib_type: "A" # To allow Salmon to automatically infer the library type, simply provide -l A or --libType A to Salmon
       extra: "--gcBias"
