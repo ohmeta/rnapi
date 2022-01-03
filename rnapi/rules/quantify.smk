@@ -143,7 +143,6 @@ else:
 rule quantify_salmon:
     input:
         reads = get_clean_reads,
-        gtf = config["reference"]["gtf"],
         index = expand(os.path.join(config["reference"]["index_salmon"], "{file}"),
                        file=["complete_ref_lens.bin", "ctable.bin", "ctg_offsets.bin",
                              "mphf.bin", "pos.bin", "rank.bin", "refAccumLengths.bin",
