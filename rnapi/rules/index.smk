@@ -95,7 +95,7 @@ rule index_salmon:
             shell(
                 '''
                 zcat {input.dna} | grep "^>" | awk -F'[> ]' '{{print $2}}' > {params.index}/decoys.txt
-                zcat {input.cdna} {input.dna} > {params.index}/gentrome.fa.gz
+                cat {input.cdna} {input.dna} > {params.index}/gentrome.fa.gz
 
                 salmon index \
                 --transcripts {params.index}/gentrome.fa.gz \
