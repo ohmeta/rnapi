@@ -77,24 +77,24 @@ index_salmon:
 
 align_genome_star:
   mem: "30G"
-  output: "logs/03.{rule}/{rule}.{sample}.o"
-  error: "logs/03.{rule}/{rule}.{sample}.e"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.e"
 
 align_transcriptome_star:
   mem: "30G"
-  output: "logs/03.{rule}/{rule}.{sample}.o"
-  error: "logs/03.{rule}/{rule}.{sample}.e"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.e"
 
 quantify_gene_star:
   mem: "1G"
-  output: "logs/03.{rule}/{rule}.{sample}.o"
-  error: "logs/03.{rule}/{rule}.{sample}.e"
+  output: "logs/03.{rule}/{rule}.o"
+  error: "logs/03.{rule}/{rule}.e"
 
 
 quantify_transcript_star:
   mem: "5G"
-  output: "logs/03.{rule}/{rule}.{sample}.o"
-  error: "logs/03.{rule}/{rule}.{sample}.e"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.e"
 
 quantify_transcript_star_merge:
   mem: "1G"
@@ -103,8 +103,8 @@ quantify_transcript_star_merge:
 
 quantify_salmon:
   mem: "5G"
-  output: "logs/03.{rule}/{rule}.{sample}.o"
-  error: "logs/03.{rule}/{rule}.{sample}.e"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.e"
 
 quantify_salmon_merge:
   mem: "5G"
