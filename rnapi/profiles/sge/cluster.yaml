@@ -1,0 +1,112 @@
+__resources__:
+  gpu: 
+    - "gpu"
+    - "nvidia_gpu"
+
+__options__:
+  jc:
+    - "jc"
+    - "jclass"
+    - "job_class"
+
+__default__:
+  queue: "st.q"
+  project: "st_m"
+  workdir: "./"
+  mem: "1G"
+  threads: 1
+
+prepare_short_reads:
+  output: "logs/00.{rule}/{rule}.{wildcards.sample}.o"
+  error: "logs/00.{rule}/{rule}.{wildcards.sample}.e"
+
+raw_fastqc:
+  mem: "512M"
+  output: "logs/00.{rule}/{rule}.{wildcards.sample}.o"
+  error: "logs/00.{rule}/{rule}.{wildcards.sample}.e"
+
+raw_fastqc_multiqc:
+  mem: "128M"
+  output: "logs/00.{rule}/{rule}.o"
+  error: "logs/00.{rule}/{rule}.e"
+
+raw_report:
+  mem: "1G"
+  output: "logs/00.{rule}/{rule}.{wildcards.sample}.o"
+  error: "logs/00.{rule}/{rule}.{wildcards.sample}.e"
+
+raw_report_merge:
+  mem: "512M"
+  output: "logs/00.{rule}/{rule}.o"
+  error: "logs/00.{rule}/{rule}.e"
+
+trimming_fastp:
+  mem: "1G"
+  output: "logs/01.{rule}/{rule}.{wildcards.sample}.o"
+  error: "logs/01.{rule}/{rule}.{wildcards.sample}.e"
+
+trimming_fastp_multiqc:
+  mem: "128M"
+  output: "logs/01.{rule}/{rule}.o"
+  error: "logs/01.{rule}/{rule}.e"
+
+trimming_report:
+  mem: "1G"
+  output: "logs/01.{rule}/{rule}.{wildcards.sample}.o"
+  error: "logs/01.{rule}/{rule}.{wildcards.sample}.e"
+
+trimming_report_merge:
+  mem: "512M"
+  output: "logs/01.{rule}/{rule}.o"
+  error: "logs/01.{rule}/{rule}.e"
+
+index_star:
+  mem: "30G"
+  output: "logs/02.{rule}/{rule}.o"
+  error: "logs/02.{rule}/{rule}.e"
+
+index_rsem:
+  mem: "10G"
+  output: "logs/02.{rule}/{rule}.o"
+  error: "logs/02.{rule}/{rule}.e"
+
+index_salmon:
+  mem: "10G"
+  output: "logs/02.{rule}/{rule}.o"
+  error: "logs/02.{rule}/{rule}.e"
+
+align_genome_star:
+  mem: "30G"
+  output: "logs/03.{rule}/{rule}.{sample}.o"
+  error: "logs/03.{rule}/{rule}.{sample}.e"
+
+align_transcriptome_star:
+  mem: "30G"
+  output: "logs/03.{rule}/{rule}.{sample}.o"
+  error: "logs/03.{rule}/{rule}.{sample}.e"
+
+quantify_gene_star:
+  mem: "1G"
+  output: "logs/03.{rule}/{rule}.{sample}.o"
+  error: "logs/03.{rule}/{rule}.{sample}.e"
+
+
+quantify_transcript_star:
+  mem: "5G"
+  output: "logs/03.{rule}/{rule}.{sample}.o"
+  error: "logs/03.{rule}/{rule}.{sample}.e"
+
+quantify_transcript_star_merge:
+  mem: "1G"
+  output: "logs/03.{rule}/{rule}.o"
+  error: "logs/03.{rule}/{rule}.e"
+
+quantify_salmon:
+  mem: "5G"
+  output: "logs/03.{rule}/{rule}.{sample}.o"
+  error: "logs/03.{rule}/{rule}.{sample}.e"
+
+quantify_salmon_merge:
+  mem: "5G"
+  output: "logs/03.{rule}/{rule}.o"
+  error: "logs/03.{rule}/{rule}.e"

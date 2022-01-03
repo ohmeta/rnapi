@@ -1,0 +1,134 @@
+__resources__:
+  gpu: 
+    - "gpu"
+    - "nvidia_gpu"
+
+__options__:
+  jc:
+    - "jc"
+    - "jclass"
+    - "job_class"
+
+__default__:
+  # we can comment it, use default, or specific it, use we defined.
+  # eg: HPC2021 of HKU
+  
+  #partition: "intel" # use default, can uncomment and change
+  # partition | default;max job duration | # of nodes | cores/node | RAM/node(GB) | RAM/core(GB) | Features
+  #########################################################################################################
+  # intel     | 1 Day;4 Days             | 84         | 32         | 192          | 6            | GOLD6625R
+  # amd       | 1 Day;4 Days             | 28         | 64         | 256          | 4            | EPYC7542 
+  # amd       | 1 Day;4 Days             | 28         | 128        | 512          | 4            | EPYC7742
+  # gpu       | 1 Day;1 Week             | 4          | 32         | 384          | 12           | 4x V100
+  # gpu       | 1 Day;1 Week             | 3          | 32         | 384          | 12           | 8x V100
+  # hugumem   | 1 Day;1 Week             | 2          | 128        | 2048         | 16           | EPYC7742 + 2TB RAM
+  
+  #qos: "normal" # use default, can uncomment and change
+  # qos     | partition     | max job duration | max resources per job
+  ####################################################################
+  # debug   | intel,amd,gpu | 30 minutes       | 2 nodes, 2 GPUs
+  # normal  | intel,amd     | 4 Days           | 1024 cores
+  # long    | intel,amd     | 2 Weeks          | One node
+  # special | intel,amd     | 1 Day            | 2048 cores
+  # gpu     | gpu           | 1 Week           | One node, 4 GPUs
+  # hugemem | hugemem       | 1 Week           | One node, 2TB RAM
+
+  mem: "512M"
+  nodes: 1 # one rule run on one node, unless rule support MPI/openmp
+  #threads: 1
+  #time: 24:00:00 # one day, PriorityTimelimit
+
+prepare_short_reads:
+  output: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
+
+raw_fastqc:
+  mem: "512M"
+  output: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
+
+raw_fastqc_multiqc:
+  mem: "128M"
+  output: "logs/00.{rule}/{rule}.{jobid}.o"
+  error: "logs/00.{rule}/{rule}.{jobid}.e"
+
+raw_report:
+  mem: "1G"
+  output: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
+
+raw_report_merge:
+  mem: "512M"
+  output: "logs/00.{rule}/{rule}.{jobid}.o"
+  error: "logs/00.{rule}/{rule}.{jobid}.e"
+
+trimming_fastp:
+  mem: "1G"
+  output: "logs/01.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/01.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
+
+trimming_fastp_multiqc:
+  mem: "128M"
+  output: "logs/01.{rule}/{rule}.{jobid}.o"
+  error: "logs/01.{rule}/{rule}.{jobid}.e"
+
+trimming_report:
+  mem: "1G"
+  output: "logs/01.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/01.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
+
+trimming_report_merge:
+  mem: "512M"
+  output: "logs/01.{rule}/{rule}.{jobid}.o"
+  error: "logs/01.{rule}/{rule}.{jobid}.e"
+
+index_star:
+  mem: "30G"
+  output: "logs/02.{rule}/{rule}.{jobid}.o"
+  error: "logs/02.{rule}/{rule}.{jobid}.e"
+
+index_rsem:
+  mem: "10G"
+  output: "logs/02.{rule}/{rule}.{jobid}.o"
+  error: "logs/02.{rule}/{rule}.{jobid}.e"
+
+index_salmon:
+  mem: "10G"
+  output: "logs/02.{rule}/{rule}.{jobid}.o"
+  error: "logs/02.{rule}/{rule}.{jobid}.e"
+
+align_genome_star:
+  mem: "30G"
+  output: "logs/03.{rule}/{rule}.{sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{sample}.{jobid}.e"
+
+align_transcriptome_star:
+  mem: "30G"
+  output: "logs/03.{rule}/{rule}.{sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{sample}.{jobid}.e"
+
+quantify_gene_star:
+  mem: "1G"
+  output: "logs/03.{rule}/{rule}.{sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{sample}.{jobid}.e"
+
+
+quantify_transcript_star:
+  mem: "5G"
+  output: "logs/03.{rule}/{rule}.{sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{sample}.{jobid}.e"
+
+quantify_transcript_star_merge:
+  mem: "1G"
+  output: "logs/03.{rule}/{rule}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{jobid}.e"
+
+quantify_salmon:
+  mem: "5G"
+  output: "logs/03.{rule}/{rule}.{sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{sample}.{jobid}.e"
+
+quantify_salmon_merge:
+  mem: "5G"
+  output: "logs/03.{rule}/{rule}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{jobid}.e"

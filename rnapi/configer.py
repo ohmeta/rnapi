@@ -31,7 +31,26 @@ class rnaconfig:
     sub_dirs = [
         "envs",
         "profiles",
-        "results"
+        "results",
+        "logs/00.prepare_short_reads",
+        "logs/00.raw_fastqc",
+        "logs/00.raw_fastqc_multiqc",
+        "logs/00.raw_report",
+        "logs/00.raw_report_merge",
+        "logs/01.trimming_fastp",
+        "logs/01.trimming_fastp_multiqc",
+        "logs/01.trimming_report",
+        "logs/01.trimming_report_merge",
+        "logs/02.index_star",
+        "logs/02.index_rsem",
+        "logs/02.index_salmon",
+        "logs/03.align_genome_star",
+        "logs/03.align_transcriptome_star",
+        "logs/03.quantify_gene_star",
+        "logs/03.quantify_transcript_star",
+        "logs/03.quantify_transcript_star_merge",
+        "logs/03.quantify_salmon",
+        "logs/03.quantify_salmon_merge"
     ]
 
     def __init__(self, work_dir):
