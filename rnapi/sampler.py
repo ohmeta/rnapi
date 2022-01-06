@@ -9,7 +9,6 @@ def parse_samples(
     samples_tsv,
     interleaved="false",
     reads_layout="pe",
-    begin_point="trimming",
     check_samples=False,
 ):
     samples_df = pd.read_csv(samples_tsv, sep="\t").set_index("id", drop=False)
@@ -50,21 +49,6 @@ def parse_samples(
     else:
         print("wrong header: {header}".format(header=samples_df.columns))
         cancel = True
-
-    if begin_point == "binning":
-        if len(samples_df) != len(samples_df.index.unique()):
-            print(
-                "when begin with binning, samples id need to be unique, because we can't merge assembly"
-            )
-            cancel = True
-
-        if check_samples:
-            if "scaftigs" in samples_df.columns:
-                for sample_id in samples_df.index.unique():
-                    scaftigs = samples_df.loc[sample_id, "scaftigs"]
-                    if not os.path.exists(scaftigs):
-                        print(f"{scaftigs} not exists")
-                        cancel = True
 
     if cancel:
         sys.exit(-1)

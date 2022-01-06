@@ -135,10 +135,16 @@ rule prepare_short_reads_all:
 def get_reads(wildcards, step):
     read = short_reads_suffix()
 
+    suffix = ""
+    if step == "delriborna":
+        suffix = "nonrrna"
+    else:
+        suffix = step
+
     short_reads = expand(os.path.join(
         config["output"][step],
-        "short_reads/{sample}/{sample}.{step}{read}.fq.gz"),
-                         step=step,
+        "short_reads/{sample}/{sample}.{suffix}{read}.fq.gz"),
+                         suffix=suffix,
                          read=read,
                          sample=wildcards.sample)
     return short_reads
