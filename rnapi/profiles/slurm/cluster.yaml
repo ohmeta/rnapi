@@ -82,6 +82,21 @@ trimming_report_merge:
   output: "logs/01.{rule}/{rule}.{jobid}.o"
   error: "logs/01.{rule}/{rule}.{jobid}.e"
 
+delriborna_ribodetector:
+  mem: "20G"
+  output: "logs/02.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/02.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
+
+delriborna_report:
+  mem: "1G"
+  output: "logs/02.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/02.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
+
+delriborna_report_merge:
+  mem: "512M"
+  output: "logs/02.{rule}/{rule}.{jobid}.o"
+  error: "logs/02.{rule}/{rule}.{jobid}.e"
+
 index_star:
   mem: "30G"
   output: "logs/02.{rule}/{rule}.{jobid}.o"

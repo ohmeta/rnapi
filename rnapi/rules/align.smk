@@ -14,7 +14,9 @@
 
 
 def get_clean_reads(wildcards):
-    if TRIMMING_DO:
+    if DELRIBORNA_DO:
+        return get_reads(wildcards, "delriborna")
+    elif TRIMMING_DO:
         return get_reads(wildcards, "trimming")
     else:
         return get_reads(wildcards, "raw")

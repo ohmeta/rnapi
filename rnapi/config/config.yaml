@@ -22,7 +22,6 @@ params:
   fq_encoding: "sanger" # fastq quality encoding. available values: 'sanger', 'solexa', 'illumina-1.3+', 'illumina-1.5+', 'illumina-1.8+'. (default "sanger")
   reads_layout: "pe"
   interleaved: False
-  begin: "trimming"
   strandedness: "reverse" # "", "forward", "reverse"
 
   raw:
@@ -53,6 +52,15 @@ params:
       length_required: 51
       n_base_limit: 5
 
+  delriborna:
+    threads: 8
+    ribodetector:
+      do: True
+      GPU: True
+      reads_len: 100
+      chunk_size: 256 # control memory usage when using CPU
+      extra: "--memory 10G" # only work for GPU
+
   qcreport:
     do: True
     seqkit:
@@ -81,9 +89,10 @@ params:
 output:
   raw: "results/00.raw"
   trimming: "results/01.trimming"
-  qcreport: "results/02.qcreport"
-  align: "results/03.align"
-  quantify: "results/04.quantify"
+  delriborna: "results/02.delriborna"
+  qcreport: "results/03.qcreport"
+  align: "results/04.align"
+  quantify: "results/05.quantify"
 
 
 envs:
