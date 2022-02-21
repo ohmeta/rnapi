@@ -35,6 +35,8 @@ RNASEQ_WF = [
     "pseudo_align_kallisto_all",
     "quantification_salmon_all",
     "quantification_sleuth_all",
+    "assembly_xcr_trust4_all",
+    "assembly_all",
     "all"
 ]
 

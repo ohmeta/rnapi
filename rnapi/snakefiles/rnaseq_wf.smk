@@ -43,6 +43,7 @@ include: "../rules/delriborna.smk"
 include: "../rules/index.smk"
 include: "../rules/align.smk"
 include: "../rules/quantify.smk"
+include: "../rules/assembly.smk"
 
 
 rule all:
@@ -51,7 +52,8 @@ rule all:
         rules.trimming_all.input,
         rules.delriborna_all.input,
         rules.align_all.input,
-        rules.quantify_all.input
+        rules.quantify_all.input,
+        rules.assembly_all.input
 
 
 localrules: \
@@ -70,4 +72,6 @@ localrules: \
     align_all, \
     quantify_gene_star_all, \
     quantify_transcript_star_all, \
-    quantify_all
+    quantify_all, \
+    assembly_xcr_trust4_all, \
+    assembly_all

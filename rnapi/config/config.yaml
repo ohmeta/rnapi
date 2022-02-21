@@ -85,14 +85,22 @@ params:
       lib_type: "A" # To allow Salmon to automatically infer the library type, simply provide -l A or --libType A to Salmon
       extra: "--gcBias"
 
+  assembly:
+    threads: 32
+    trust4:
+      do: True
+      coordinate_fasta: "/home/zhujie/databases/funcgenomics/IMGT/TRUST4/Homo_sapien/human_IMGT+C.fa"
+      reference_fasta: "/home/zhujie/databases/funcgenomics/IMGT/TRUST4/Homo_sapien/human_IMGT+C.fa"
+
 
 output:
   raw: "results/00.raw"
   trimming: "results/01.trimming"
   delriborna: "results/02.delriborna"
-  qcreport: "results/03.qcreport"
-  align: "results/04.align"
-  quantify: "results/05.quantify"
+  qcreport: "results/02.qcreport"
+  align: "results/03.align"
+  quantify: "results/04.quantify"
+  assembly: "results/05.assembly"
 
 
 envs:

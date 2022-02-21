@@ -99,18 +99,18 @@ delriborna_report_merge:
 
 index_star:
   mem: "30G"
-  output: "logs/02.{rule}/{rule}.{jobid}.o"
-  error: "logs/02.{rule}/{rule}.{jobid}.e"
+  output: "logs/03.{rule}/{rule}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{jobid}.e"
 
 index_rsem:
   mem: "10G"
-  output: "logs/02.{rule}/{rule}.{jobid}.o"
-  error: "logs/02.{rule}/{rule}.{jobid}.e"
+  output: "logs/03.{rule}/{rule}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{jobid}.e"
 
 index_salmon:
   mem: "10G"
-  output: "logs/02.{rule}/{rule}.{jobid}.o"
-  error: "logs/02.{rule}/{rule}.{jobid}.e"
+  output: "logs/03.{rule}/{rule}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{jobid}.e"
 
 align_genome_star:
   mem: "30G"
@@ -124,26 +124,31 @@ align_transcriptome_star:
 
 quantify_gene_star:
   mem: "1G"
-  output: "logs/03.{rule}/{rule}.{jobid}.o"
-  error: "logs/03.{rule}/{rule}.{jobid}.e"
+  output: "logs/04.{rule}/{rule}.{jobid}.o"
+  error: "logs/04.{rule}/{rule}.{jobid}.e"
 
 
 quantify_transcript_star:
   mem: "5G"
-  output: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
-  error: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
+  output: "logs/04.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/04.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 quantify_transcript_star_merge:
   mem: "1G"
-  output: "logs/03.{rule}/{rule}.{jobid}.o"
-  error: "logs/03.{rule}/{rule}.{jobid}.e"
+  output: "logs/04.{rule}/{rule}.{jobid}.o"
+  error: "logs/04.{rule}/{rule}.{jobid}.e"
 
 quantify_salmon:
   mem: "5G"
-  output: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
-  error: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
+  output: "logs/04.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/04.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 quantify_salmon_merge:
   mem: "5G"
-  output: "logs/03.{rule}/{rule}.{jobid}.o"
-  error: "logs/03.{rule}/{rule}.{jobid}.e"
+  output: "logs/04.{rule}/{rule}.{jobid}.o"
+  error: "logs/04.{rule}/{rule}.{jobid}.e"
+
+assembly_xcr_trust4:
+  mem: "10G"
+  output: "logs/05.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/05.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
