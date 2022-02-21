@@ -19,8 +19,7 @@ rule assembly_xcr_trust4:
                      "logs/trust4/{sample}.trust4.log")
     params:
         outdir = os.path.join(config["output"]["assembly"], "trust4/{sample}"),
-        prefix = os.path.join(config["output"]["assembly"],
-                              "trust4/{sample}/{sample}")
+        prefix = "{sample}"
     shell:
         '''
         rm -rf {params.outdir}
@@ -32,6 +31,7 @@ rule assembly_xcr_trust4:
         -1 {input.reads[0]} \
         -2 {input.reads[1]} \
         -o {params.prefix} \
+        --od {params.outdir} \
         -t {threads} \
         --stage 0 \
         >{log} 2>&1
