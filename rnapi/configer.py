@@ -44,16 +44,17 @@ class rnaconfig:
         "logs/02.delriborna_ribodetector",
         "logs/02.delriborna_report",
         "logs/02.delriborna_report_merge",
-        "logs/02.index_star",
-        "logs/02.index_rsem",
-        "logs/02.index_salmon",
+        "logs/03.index_star",
+        "logs/03.index_rsem",
+        "logs/03.index_salmon",
         "logs/03.align_genome_star",
         "logs/03.align_transcriptome_star",
-        "logs/03.quantify_gene_star",
-        "logs/03.quantify_transcript_star",
-        "logs/03.quantify_transcript_star_merge",
-        "logs/03.quantify_salmon",
-        "logs/03.quantify_salmon_merge"
+        "logs/04.quantify_gene_star",
+        "logs/04.quantify_transcript_star",
+        "logs/04.quantify_transcript_star_merge",
+        "logs/04.quantify_salmon",
+        "logs/04.quantify_salmon_merge",
+        "logs/05.assembly_xcr_trust4"
     ]
 
     def __init__(self, work_dir):
