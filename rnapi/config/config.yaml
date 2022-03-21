@@ -59,7 +59,7 @@ params:
       GPU: True
       reads_len: 100
       chunk_size: 256 # control memory usage when using CPU
-      extra: "--memory 10G" # only work for GPU
+      extra: "--memory 12" # only work for GPU
 
   qcreport:
     do: True
