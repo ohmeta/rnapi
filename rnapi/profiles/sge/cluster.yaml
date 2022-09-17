@@ -61,6 +61,15 @@ trimming_report_merge:
   error: "logs/01.{rule}/{rule}.e"
 
 delriborna_ribodetector:
+  # GPU mode
+  # qos: "gpu"
+  # partition: "gpu"
+  # gres: "gpu:1"
+
+  # CPU mode
+  #cpus-per-task: 8 # same with config.yaml
+  #threads-per-core: 1
+
   mem: "20G"
   output: "logs/02.{rule}/{rule}.{wildcards.sample}.o"
   error: "logs/02.{rule}/{rule}.{wildcards.sample}.e"
