@@ -34,16 +34,31 @@ rule delriborna_ribodetector:
                      "logs/{sample}.ribodetector.log")
     shell:
         '''
+        OUT1={output.reads[0]}
+        OUT2={output.reads[1]}
+        RNA1={output.reads_rrna[0]}
+        RNA2={output.reads_rrna[1]}
+
+        out1=`echo ${{OUT1%.gz}}`
+        out2=`echo ${{OUT2%.gz}}`
+        rna1=`echo ${{RNA1%.gz}}`
+        rna2=`echo ${{RNA2%.gz}}`
+
         {params.ribodetector} \
         --len {params.length} \
         --ensure rrna \
         --input {input.reads} \
-        --output {output.reads} \
-        --rrna {output.reads_rrna} \
+        --output $out1 $out2 \
+        --rrna $rna1 $rna2 \
         --chunk_size {params.chunk_size} \
         --threads {threads} \
         {params.extra} \
         > {log} 2>&1
+
+        pigz -p {threads} $out1 >> {log} 2>&1
+        pigz -p {threads} $out2 >> {log} 2>&1
+        pigz -p {threads} $rna1 >> {log} 2>&1
+        pigz -p {threads} $rna2 >> {log} 2>&1
         '''
 
 
