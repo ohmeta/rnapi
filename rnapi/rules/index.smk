@@ -11,6 +11,8 @@ rule index_star:
         config["params"]["align"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/index_star.log")
+    conda:
+        config["envs"]["align"]
     shell:
         '''
         mkdir -p {params.index}
@@ -43,22 +45,24 @@ rule index_rsem:
         config["params"]["align"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/index_rsem.log")
-    run:
-        outdir = os.path.dirname(params.outprefix)
+    conda:
+        config["envs"]["align"]
+    shell:
+        '''
+        OUTPREFIX={params.outprefix} 
+        OUTDIR=`echo ${{OUTPREFIX%/*}}`
 
-        shell(
-            '''
-            mkdir -p {outdir}
-            pigz -dkc {input.dna} > {params.outprefix}.fasta
+        mkdir -p $OUTDIR
+        pigz -dkc {input.dna} > {params.outprefix}.fasta
 
-            rsem-prepare-reference \
-            --gtf {input.gtf} \
-            --num-threads {threads} \
-            {params.outprefix}.fasta {params.outprefix} \
-            > {log} 2>&1
+        rsem-prepare-reference \
+        --gtf {input.gtf} \
+        --num-threads {threads} \
+        {params.outprefix}.fasta {params.outprefix} \
+        > {log} 2>&1
 
-            rm -rf {params.outprefix}.fasta
-            ''')
+        rm -rf {params.outprefix}.fasta
+        '''
 
 
 rule index_salmon:
@@ -78,30 +82,30 @@ rule index_salmon:
         config["params"]["align"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/index_salmon.log")
-    run:
-        shell('''mkdir -p {params.index}''')
+    conda:
+        config["envs"]["align"]
+    shell:
+        '''
+        mkdir -p {params.index}
 
-        if not params.index_add_genome:
-            shell(
-                '''
-                salmon index \
-                --transcripts {input.cdna} \
-                --index {params.index} \
-                --kmerLen {params.kmer_len} \
-                --threads {threads} \
-                > {log} 2>&1
-                ''')
-        else:
-            shell(
-                '''
-                zcat {input.dna} | grep "^>" | awk -F'[> ]' '{{print $2}}' > {params.index}/decoys.txt
-                cat {input.cdna} {input.dna} > {params.index}/gentrome.fa.gz
+        if [ "{params.index_add_genome}" != "True" ];
+        then
+            salmon index \
+            --transcripts {input.cdna} \
+            --index {params.index} \
+            --kmerLen {params.kmer_len} \
+            --threads {threads} \
+            > {log} 2>&1
+        else
+            zcat {input.dna} | grep "^>" | awk -F'[> ]' '{{print $2}}' > {params.index}/decoys.txt
+            cat {input.cdna} {input.dna} > {params.index}/gentrome.fa.gz
 
-                salmon index \
-                --transcripts {params.index}/gentrome.fa.gz \
-                --decoys {params.index}/decoys.txt \
-                --index {params.index} \
-                --kmerLen {params.kmer_len} \
-                --threads {threads} \
-                > {log} 2>&1
-                ''')
+            salmon index \
+            --transcripts {params.index}/gentrome.fa.gz \
+            --decoys {params.index}/decoys.txt \
+            --index {params.index} \
+            --kmerLen {params.kmer_len} \
+            --threads {threads} \
+            > {log} 2>&1
+        fi
+        '''

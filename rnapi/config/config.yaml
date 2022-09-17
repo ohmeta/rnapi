@@ -110,4 +110,5 @@ envs:
   fastp: "envs/fastp.yaml"
   multiqc: "envs/multiqc.yaml"
   delriborna: "envs/delriborna.yaml"
+  align: "envs/align.yaml"
   bioenv3.8: "envs/bioenv3.8.yaml"
