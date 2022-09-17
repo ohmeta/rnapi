@@ -104,4 +104,5 @@ output:
 
 
 envs:
+  multiqc: "envs/multiqc.yaml"
   bioenv3.8: "envs/bioenv3.8.yaml"

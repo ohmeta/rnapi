@@ -153,6 +153,8 @@ rule trimming_fastp_multiqc:
         os.path.join(config["output"]["trimming"], "logs/multiqc.fastp.log")
     params:
         outdir = os.path.join(config["output"]["trimming"], "report")
+    conda:
+        config["envs"]["multiqc"]
     shell:
         '''
         multiqc \
