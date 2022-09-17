@@ -23,7 +23,8 @@ rule delriborna_ribodetector:
                else "ribodetector_cpu",
         length = config["params"]["delriborna"]["ribodetector"]["reads_len"],
         chunk_size = config["params"]["delriborna"]["ribodetector"]["chunk_size"],
-        extra = config["params"]["delriborna"]["ribodetector"]["extra"]
+        extra = config["params"]["delriborna"]["ribodetector"]["extra"],
+        outdir = os.path.join(config["output"]["delriborna"], "short_reads/{sample}")
     benchmark:
         os.path.join(config["output"]["delriborna"],
                      "benchmark/ribodetector/{sample}.ribodetector.tsv")
@@ -45,6 +46,9 @@ rule delriborna_ribodetector:
         out2=`echo ${{OUT2%.gz}}`
         rna1=`echo ${{RNA1%.gz}}`
         rna2=`echo ${{RNA2%.gz}}`
+
+        rm -rf {params.outdir}
+        mkdir -p {params.outdir}
 
         {params.ribodetector} \
         --len {params.length} \
