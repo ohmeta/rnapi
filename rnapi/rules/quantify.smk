@@ -56,31 +56,32 @@ rule quantify_transcript_star:
         config["params"]["quantify"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/quantify_transcript_star/{sample}.log")
-    run:
-        import pandas as pd
-
-        forward_prob  = 0
-        if pd.isnull(params.strandedness) or \
-           params.strandedness == "none" or \
-           params.strandedness == "":
-            forward_prob = 0.5  # non stranded protocol
-        elif strandedness == "forward":
-            forward_prob = 1 # for ligation-stranded protocols
-        elif strandedness == "reverse":
-            forward_prob = 0 # for dUTP libraries
-        else:
-            sys.exit("strandedness is not right")
-
-        shell(
-            '''
-            rsem-calculate-expression \
-            --bam --no-bam-output \
-            -p {threads} \
-            --paired-end \
-            --forward-prob {forward_prob} \
-            {input.bam} {params.index} {params.outprefix} \
-            > {log} 2>&1
-            ''')
+    conda:
+        config["envs"]["align"]
+    shell:
+        '''
+        forwardprob=0
+        if [ "{params.strandedness}" == "" ];
+        then
+            forwardprob=0.5
+        elif [ "{params.strandedness}" == "forward" ];
+        then
+            forwardprob=1
+        elif [ "{params.strandedness}" == "reverse" ];
+        then
+            forwardprob=0
+        else
+            exit 0
+        fi
+        
+        rsem-calculate-expression \
+        --bam --no-bam-output \
+        -p {threads} \
+        --paired-end \
+        --forward-prob $forwardprob \
+        {input.bam} {params.index} {params.outprefix} \
+        > {log} 2>&1
+        '''
 
 
 rule quantify_transcript_star_merge:
@@ -156,6 +157,8 @@ rule quantify_salmon:
         extra = config["params"]["quantify"]["salmon"]["extra"]
     threads:
         config["params"]["quantify"]["threads"]
+    conda:
+        config["envs"]["align"]
     shell:
         '''
         salmon quant \

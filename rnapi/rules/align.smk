@@ -38,21 +38,22 @@ rule align_genome_star:
         config["params"]["align"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/align_genome_star/{sample}.log")
-    run:
-        shell(
-            '''
-            STAR \
-            --quantMode GeneCounts \
-            --sjdbGTFfile {input.gtf} \
-            --runThreadN {threads} \
-            --readFilesCommand zcat \
-            --genomeDir {params.index} \
-            --readFilesIn {input.reads} \
-            --outFileNamePrefix {params.outprefix}/ \
-            --outSAMtype BAM SortedByCoordinate \
-            --outStd Log \
-            > {log} 2>&1
-            ''')
+    conda:
+        config["envs"]["align"]
+    shell:
+        '''
+        STAR \
+        --quantMode GeneCounts \
+        --sjdbGTFfile {input.gtf} \
+        --runThreadN {threads} \
+        --readFilesCommand zcat \
+        --genomeDir {params.index} \
+        --readFilesIn {input.reads} \
+        --outFileNamePrefix {params.outprefix}/ \
+        --outSAMtype BAM SortedByCoordinate \
+        --outStd Log \
+        > {log} 2>&1
+        '''
 
 
 rule align_transcriptome_star:
@@ -73,21 +74,22 @@ rule align_transcriptome_star:
         config["params"]["align"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/align_transcriptome_star/{sample}.log")
-    run:
-        shell(
-            '''
-            STAR \
-            --quantMode TranscriptomeSAM \
-            --sjdbGTFfile {input.gtf} \
-            --runThreadN {threads} \
-            --readFilesCommand zcat \
-            --genomeDir {params.index} \
-            --readFilesIn {input.reads} \
-            --outFileNamePrefix {params.outprefix}/ \
-            --outSAMtype BAM SortedByCoordinate \
-            --outStd Log \
-            > {log} 2>&1
-            ''')
+    conda:
+        config["envs"]["align"]
+    shell:
+        '''
+        STAR \
+        --quantMode TranscriptomeSAM \
+        --sjdbGTFfile {input.gtf} \
+        --runThreadN {threads} \
+        --readFilesCommand zcat \
+        --genomeDir {params.index} \
+        --readFilesIn {input.reads} \
+        --outFileNamePrefix {params.outprefix}/ \
+        --outSAMtype BAM SortedByCoordinate \
+        --outStd Log \
+        > {log} 2>&1
+        '''
 
 
 if config["params"]["align"]["star"]["do"]:
