@@ -20,6 +20,8 @@ rule assembly_xcr_trust4:
     params:
         outdir = os.path.join(config["output"]["assembly"], "trust4/{sample}"),
         prefix = "{sample}"
+    conda:
+        config["envs"]["trust4"]
     shell:
         '''
         rm -rf {params.outdir}

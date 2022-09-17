@@ -111,4 +111,4 @@ envs:
   multiqc: "envs/multiqc.yaml"
   delriborna: "envs/delriborna.yaml"
   align: "envs/align.yaml"
-  bioenv3.8: "envs/bioenv3.8.yaml"
+  trust4: "envs/trust4.yaml"
