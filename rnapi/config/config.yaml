@@ -31,6 +31,7 @@ params:
       do: False
 
   trimming:
+    save_reads: True
     fastp:
       do: True
       threads: 4
@@ -51,6 +52,8 @@ params:
       cut_right_mean_quality: 20
       length_required: 51
       n_base_limit: 5
+      dedup: False
+      dup_calc_accuracy: 3 # [1, 2, 3, 4, 5, 6] # only used when dedup: True
 
   delriborna:
     threads: 8
@@ -104,5 +107,6 @@ output:
 
 
 envs:
+  fastp: "envs/fastp.yaml"
   multiqc: "envs/multiqc.yaml"
   bioenv3.8: "envs/bioenv3.8.yaml"
