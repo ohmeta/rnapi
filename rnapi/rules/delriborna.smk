@@ -32,6 +32,8 @@ rule delriborna_ribodetector:
     log:
         os.path.join(config["output"]["delriborna"],
                      "logs/{sample}.ribodetector.log")
+    conda:
+        config["envs"]["delriborna"]
     shell:
         '''
         OUT1={output.reads[0]}
