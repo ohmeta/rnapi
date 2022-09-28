@@ -67,8 +67,8 @@ rule index_rsem:
 
 rule index_salmon:
     input:
-        dna = config["reference"]["dna_gencode"],
-        cdna = config["reference"]["cdna_gencode"]
+        dna = config["reference"]["dna"],
+        cdna = config["reference"]["cdna"]
     output:
         expand(os.path.join(config["reference"]["index_salmon"], "{file}"),
                file=["complete_ref_lens.bin", "ctable.bin", "ctg_offsets.bin",

@@ -22,6 +22,39 @@ def get_clean_reads(wildcards):
         return get_reads(wildcards, "raw")
 
 
+rule align_reads_star:
+    input:
+        reads = get_clean_reads,
+        gtf = config["reference"]["gtf"],
+        index = expand(os.path.join(config["reference"]["index_star"], "{file}"),
+                       file=["Genome", "SA", "SAindex"])
+    output:
+        align_bam = os.path.join(config["output"]["align"], "star/align/{sample}/Aligned.sortedByCoord.out.bam"),
+        gene_tab = os.path.join(config["output"]["align"], "star/align/{sample}/ReadsPerGene.out.tab")
+    params:
+        index = config["reference"]["index_star"],
+        outprefix = os.path.join(config["output"]["align"], "star/align/{sample}")
+    threads:
+        config["params"]["align"]["threads"]
+    log:
+        os.path.join(config["output"]["align"], "logs/align_star/{sample}.log")
+    conda:
+        config["envs"]["align"]
+    shell:
+        '''
+        STAR \
+        --sjdbGTFfile {input.gtf} \
+        --runThreadN {threads} \
+        --readFilesCommand zcat \
+        --genomeDir {params.index} \
+        --readFilesIn {input.reads} \
+        --outFileNamePrefix {params.outprefix}/ \
+        --outSAMtype BAM SortedByCoordinate \
+        --outStd Log \
+        > {log} 2>&1
+        '''
+
+
 rule align_genome_star:
     input:
         reads = get_clean_reads,
@@ -93,6 +126,17 @@ rule align_transcriptome_star:
 
 
 if config["params"]["align"]["star"]["do"]:
+    rule align_reads_star_all:
+        input:
+            expand(
+                os.path.join(config["output"]["align"],
+                             "star/genome/{sample}/Aligned.sortedByCoord.out.bam"),
+                             sample=SAMPLES.index.unique())
+else:
+    rule align_reads_star_all:
+        input:
+
+
     if config["params"]["align"]["star"]["quant_mode"]["GeneCounts"]:
         rule align_genome_star_all:
             input:
@@ -131,6 +175,7 @@ else:
 
 rule align_star_all:
     input:
+        rules.align_reads_star_all.input,
         rules.align_genome_star_all.input,
         rules.align_transcriptome_star_all.input
 
