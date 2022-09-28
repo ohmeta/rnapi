@@ -99,6 +99,11 @@ index_salmon:
   output: "logs/03.{rule}/{rule}.o"
   error: "logs/03.{rule}/{rule}.e"
 
+align_reads_star:
+  mem: "30G"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.e"
+
 align_genome_star:
   mem: "30G"
   output: "logs/03.{rule}/{rule}.{wildcards.sample}.o"
