@@ -91,7 +91,7 @@ rule hlatyping_arcashla_genotype:
         mkdir -p {params.outdir}
 
         arcasHLA genotype \
-        {input} \
+        {input.r1} {input.r2} \
         --genes {params.genes} \
         --outdir {params.outdir} \
         --threads {threads} \
