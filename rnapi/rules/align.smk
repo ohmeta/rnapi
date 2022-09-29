@@ -178,7 +178,7 @@ else:
 
 rule align_star_all:
     input:
-        rules.align_reads_star_all.input,
+        #rules.align_reads_star_all.input,
         rules.align_genome_star_all.input,
         rules.align_transcriptome_star_all.input
 
