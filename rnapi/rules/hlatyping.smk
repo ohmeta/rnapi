@@ -48,11 +48,14 @@ rule hlatyping_arcashla_extract:
         config["params"]["hlatyping"]["threads"]
     shell:
         '''
+        rm -rf {params.outdir}
+        mkdir -p {params.outdir}
+
         arcasHLA extract \
         --threads {threads} \
-        --paired \
         {params.unmapped} \
         --outdir {params.outdir} \
+        --verbose \
         --log {log} \
         {input.bam}
         '''
@@ -80,11 +83,15 @@ rule hlatyping_arcashla_genotype:
         config["params"]["hlatyping"]["threads"]
     shell:
         '''
+        rm -rf {params.outdir}
+        mkdir -p {params.outdir}
+
         arcasHLA genotype \
         {input} \
         --genes {params.genes} \
         --outdir {params.outdir} \
         --threads {threads} \
+        --verbose \
         --log {log}
         '''
 
