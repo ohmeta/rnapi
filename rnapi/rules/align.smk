@@ -131,10 +131,6 @@ if config["params"]["align"]["star"]["do"]:
                 os.path.join(config["output"]["align"],
                              "star/reads/{sample}/Aligned.sortedByCoord.out.bam"),
                              sample=SAMPLES.index.unique())
-else:
-    rule align_reads_star_all:
-        input:
-
 
     if config["params"]["align"]["star"]["quant_mode"]["GeneCounts"]:
         rule align_genome_star_all:
@@ -164,9 +160,11 @@ else:
             input:
 
 else:
-    rule align_genome_star_all:
+    rule align_reads_star_all:
         input:
 
+    rule align_genome_star_all:
+        input:
 
     rule align_transcriptome_star_all:
         input:
