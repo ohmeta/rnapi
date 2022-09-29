@@ -60,7 +60,6 @@ rule all:
 
 localrules: \
     prepare_short_reads_all, \
-    prepare_reads_all, \
     raw_fastqc_all, \
     raw_report_all, \
     trimming_fastp_all, \
