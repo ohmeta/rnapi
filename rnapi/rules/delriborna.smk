@@ -25,14 +25,13 @@ rule delriborna_ribodetector:
         chunk_size = config["params"]["delriborna"]["ribodetector"]["chunk_size"],
         extra = config["params"]["delriborna"]["ribodetector"]["extra"],
         outdir = os.path.join(config["output"]["delriborna"], "short_reads/{sample}")
+    log:
+        os.path.join(config["output"]["delriborna"], "logs/{sample}.ribodetector.log")
     benchmark:
         os.path.join(config["output"]["delriborna"],
-                     "benchmark/ribodetector/{sample}.ribodetector.tsv")
+                     "benchmark/ribodetector/{sample}.ribodetector.benchmark.txt")
     threads:
         config["params"]["delriborna"]["threads"]
-    log:
-        os.path.join(config["output"]["delriborna"],
-                     "logs/{sample}.ribodetector.log")
     conda:
         config["envs"]["delriborna"]
     shell:

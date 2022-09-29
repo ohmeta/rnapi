@@ -36,7 +36,9 @@ rule align_reads_star:
     threads:
         config["params"]["align"]["threads"]
     log:
-        os.path.join(config["output"]["align"], "logs/align_reads_star/{sample}.log")
+        os.path.join(config["output"]["align"], "logs/align_reads_star/{sample}.star.log")
+    benchmark:
+        os.path.join(config["output"]["align"], "benchmark/align_reads_star/{sample}.star.benchmark.txt")
     conda:
         config["envs"]["align"]
     shell:
@@ -69,7 +71,9 @@ rule align_genome_star:
     threads:
         config["params"]["align"]["threads"]
     log:
-        os.path.join(config["output"]["align"], "logs/align_genome_star/{sample}.log")
+        os.path.join(config["output"]["align"], "logs/align_genome_star/{sample}.star_genome.log")
+    benchmark:
+        os.path.join(config["output"]["align"], "benchmark/align_genome_star/{sample}.star_genome.benchmark.txt")
     conda:
         config["envs"]["align"]
     shell:
@@ -105,7 +109,9 @@ rule align_transcriptome_star:
     threads:
         config["params"]["align"]["threads"]
     log:
-        os.path.join(config["output"]["align"], "logs/align_transcriptome_star/{sample}.log")
+        os.path.join(config["output"]["align"], "logs/align_transcriptome_star/{sample}.star_transcriptome.log")
+    benchmark:
+        os.path.join(config["output"]["align"], "benchmark/align_transcriptome_star/{sample}.star_transcriptome.benchmark.txt")
     conda:
         config["envs"]["align"]
     shell:

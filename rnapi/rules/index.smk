@@ -11,6 +11,8 @@ rule index_star:
         config["params"]["align"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/index_star.log")
+    benchmark:
+        os.path.join(config["output"]["align"], "benchmark/index_star.benchmark.txt")
     conda:
         config["envs"]["align"]
     shell:
@@ -45,6 +47,8 @@ rule index_rsem:
         config["params"]["align"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/index_rsem.log")
+    benchmark:
+        os.path.join(config["output"]["align"], "benchmark/index_rsem.benchmark.txt")
     conda:
         config["envs"]["align"]
     shell:
@@ -82,6 +86,8 @@ rule index_salmon:
         config["params"]["align"]["threads"]
     log:
         os.path.join(config["output"]["align"], "logs/index_salmon.log")
+    benchmark:
+        os.path.join(config["output"]["align"], "benchmark/index_salmon.benchmark.txt")
     conda:
         config["envs"]["align"]
     shell:

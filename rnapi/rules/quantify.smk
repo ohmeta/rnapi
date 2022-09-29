@@ -55,7 +55,9 @@ rule quantify_transcript_star:
     threads:
         config["params"]["quantify"]["threads"]
     log:
-        os.path.join(config["output"]["align"], "logs/quantify_transcript_star/{sample}.log")
+        os.path.join(config["output"]["align"], "logs/quantify_transcript_star/{sample}.quantify_transcript_star.log")
+    benchmark:
+        os.path.join(config["output"]["align"], "benchmark/quantify_transcript_star/{sample}.quantify_transcript_star.benchmark.txt")
     conda:
         config["envs"]["align"]
     shell:
@@ -140,7 +142,6 @@ else:
         input:
 
 
-
 rule quantify_salmon:
     input:
         reads = get_clean_reads,
@@ -150,6 +151,10 @@ rule quantify_salmon:
                              "reflengths.bin", "refseq.bin", "seq.bin"])
     output:
         transcript_qf = os.path.join(config["output"]["quantify"], "salmon/{sample}/quant.sf")
+    log:
+        os.path.join(config["output"]["quantify"], "logs/salmon/{sample}.salmon.log")
+    benchmark:
+        os.path.join(config["output"]["quantify"], "benchmark/salmon/{sample}.salmon.benchmark.txt")
     params:
         index = config["reference"]["index_salmon"],
         outdir = os.path.join(config["output"]["quantify"], "salmon/{sample}"),
@@ -168,7 +173,7 @@ rule quantify_salmon:
         -2 {input.reads[1]} \
         --output {params.outdir} \
         --threads {threads} \
-        {params.extra}
+        {params.extra} >{log} 2>&1
         '''
 
 
