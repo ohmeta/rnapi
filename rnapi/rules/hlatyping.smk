@@ -1,6 +1,6 @@
 rule hlatyping_arcashla_reference:
     output:
-        os.path.join(config["params"]["hlatyping"]["arcashla"], "config/arcasHLA_reference_done")
+        os.path.join(config["output"]["hlatyping"], "config/arcasHLA_reference_done")
     log:
         os.path.join(config["params"]["hlatyping"]["arcashla"], "logs/arcasHLA_reference.log")
     params:
@@ -23,7 +23,7 @@ rule hlatyping_arcashla_reference:
 
 rule hlatyping_arcashla_extract:
     input:
-        done = os.path.join(config["params"]["hlatyping"]["arcashla"], "config/arcasHLA_reference_done"),
+        done = os.path.join(config["output"]["hlatyping"], "config/arcasHLA_reference_done"),
         bam = os.path.join(config["output"]["align"],
                            "star/reads/{sample}/Aligned.sortedByCoord.out.bam")
     output:
@@ -56,7 +56,7 @@ rule hlatyping_arcashla_extract:
 
 rule hlatyping_arcashla_genotype:
     input:
-        done = os.path.join(config["params"]["hlatyping"]["arcashla"], "config/arcasHLA_reference_done"),
+        done = os.path.join(config["output"]["hlatyping"], "config/arcasHLA_reference_done"),
         r1 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.HLA.R1.fastq.gz"),
         r2 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.HLA.R2.fastq.gz")
     output:
