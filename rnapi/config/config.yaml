@@ -112,7 +112,7 @@ params:
     threads: 8
     arcashla:
       do: True
-      IMGTHLA_version: 3.46.0 # latest
+      IMGTHLA_version: latest # 3.46.0 # latest
       unmapped: False
       genes: ["DPB1", "DRB1", "DRA", "L", "K", "B", "DOB", "DRB3", "DMA", "G", "DMB", "C", "DQA1", "DOA", "F", "E", "DPA1", "DRB5", "DQB1", "H", "A", "J"]
       # genes: ["A", "B", "C", "DPB1", "DQA1", "DQB1", "DRB1"]

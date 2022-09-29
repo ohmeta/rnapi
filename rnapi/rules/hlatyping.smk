@@ -8,7 +8,9 @@ rule hlatyping_arcashla_reference:
     shell:
         '''
         if [ ! -e {output} ];
+        then
             if [ "{params.version}" == "latest" ];
+            then
                 git lfs install >{log} 2>&1
                 arcasHLA reference --update -v >>{log} 2>&1
                 touch {output}
