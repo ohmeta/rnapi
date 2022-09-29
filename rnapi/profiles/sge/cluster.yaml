@@ -17,48 +17,48 @@ __default__:
   threads: 1
 
 prepare_short_reads:
-  output: "logs/00.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/00.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 raw_fastqc:
   mem: "512M"
-  output: "logs/00.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/00.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 raw_fastqc_multiqc:
   mem: "128M"
-  output: "logs/00.{rule}/{rule}.o"
-  error: "logs/00.{rule}/{rule}.e"
+  output: "logs/00.{rule}/{rule}.{jobid}.o"
+  error: "logs/00.{rule}/{rule}.{jobid}.e"
 
 raw_report:
   mem: "1G"
-  output: "logs/00.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/00.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/00.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 raw_report_merge:
   mem: "512M"
-  output: "logs/00.{rule}/{rule}.o"
-  error: "logs/00.{rule}/{rule}.e"
+  output: "logs/00.{rule}/{rule}.{jobid}.o"
+  error: "logs/00.{rule}/{rule}.{jobid}.e"
 
 trimming_fastp:
   mem: "1G"
-  output: "logs/01.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/01.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/01.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/01.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 trimming_fastp_multiqc:
   mem: "128M"
-  output: "logs/01.{rule}/{rule}.o"
-  error: "logs/01.{rule}/{rule}.e"
+  output: "logs/01.{rule}/{rule}.{jobid}.o"
+  error: "logs/01.{rule}/{rule}.{jobid}.e"
 
 trimming_report:
   mem: "1G"
-  output: "logs/01.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/01.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/01.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/01.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 trimming_report_merge:
   mem: "512M"
-  output: "logs/01.{rule}/{rule}.o"
-  error: "logs/01.{rule}/{rule}.e"
+  output: "logs/01.{rule}/{rule}.{jobid}.o"
+  error: "logs/01.{rule}/{rule}.{jobid}.e"
 
 delriborna_ribodetector:
   # GPU mode
@@ -71,79 +71,78 @@ delriborna_ribodetector:
   #threads-per-core: 1
 
   mem: "20G"
-  output: "logs/02.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/02.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/02.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/02.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 delriborna_report:
   mem: "1G"
-  output: "logs/02.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/02.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/02.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/02.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 delriborna_report_merge:
   mem: "512M"
-  output: "logs/02.{rule}/{rule}.o"
-  error: "logs/02.{rule}/{rule}.e"
+  output: "logs/02.{rule}/{rule}.{jobid}.o"
+  error: "logs/02.{rule}/{rule}.{jobid}.e"
 
 index_star:
   mem: "30G"
-  output: "logs/03.{rule}/{rule}.o"
-  error: "logs/03.{rule}/{rule}.e"
+  output: "logs/03.{rule}/{rule}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{jobid}.e"
 
 index_rsem:
   mem: "10G"
-  output: "logs/03.{rule}/{rule}.o"
-  error: "logs/03.{rule}/{rule}.e"
+  output: "logs/03.{rule}/{rule}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{jobid}.e"
 
 index_salmon:
   mem: "10G"
-  output: "logs/03.{rule}/{rule}.o"
-  error: "logs/03.{rule}/{rule}.e"
+  output: "logs/03.{rule}/{rule}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{jobid}.e"
 
 align_reads_star:
   mem: "30G"
-  output: "logs/03.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/03.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 align_genome_star:
   mem: "30G"
-  output: "logs/03.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/03.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 align_transcriptome_star:
   mem: "30G"
-  output: "logs/03.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/03.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 quantify_gene_star:
   mem: "1G"
-  output: "logs/04.{rule}/{rule}.o"
-  error: "logs/04.{rule}/{rule}.e"
-
+  output: "logs/04.{rule}/{rule}.{jobid}.o"
+  error: "logs/04.{rule}/{rule}.{jobid}.e"
 
 quantify_transcript_star:
   mem: "5G"
-  output: "logs/04.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/04.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/04.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/04.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 quantify_transcript_star_merge:
   mem: "1G"
-  output: "logs/04.{rule}/{rule}.o"
-  error: "logs/04.{rule}/{rule}.e"
+  output: "logs/04.{rule}/{rule}.{jobid}.o"
+  error: "logs/04.{rule}/{rule}.{jobid}.e"
 
 quantify_salmon:
   mem: "5G"
-  output: "logs/04.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/04.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/04.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/04.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 quantify_salmon_merge:
   mem: "5G"
-  output: "logs/04.{rule}/{rule}.o"
-  error: "logs/04.{rule}/{rule}.e"
+  output: "logs/04.{rule}/{rule}.{jobid}.o"
+  error: "logs/04.{rule}/{rule}.{jobid}.e"
 
 assembly_xcr_trust4:
   mem: "10G"
-  output: "logs/05.{rule}/{rule}.{wildcards.sample}.o"
-  error: "logs/05.{rule}/{rule}.{wildcards.sample}.e"
+  output: "logs/05.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/05.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 hlatyping_arcashla_extract:
   mem: "5G"

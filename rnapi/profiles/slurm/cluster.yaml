@@ -123,24 +123,23 @@ index_salmon:
 
 align_reads_star:
   mem: "30G"
-  output: "logs/03.{rule}/{rule}.{sample}.{jobid}.o"
-  error: "logs/03.{rule}/{rule}.{sample}.{jobid}.e"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 align_genome_star:
   mem: "30G"
-  output: "logs/03.{rule}/{rule}.{sample}.{jobid}.o"
-  error: "logs/03.{rule}/{rule}.{sample}.{jobid}.e"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 align_transcriptome_star:
   mem: "30G"
-  output: "logs/03.{rule}/{rule}.{sample}.{jobid}.o"
-  error: "logs/03.{rule}/{rule}.{sample}.{jobid}.e"
+  output: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/03.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
 quantify_gene_star:
   mem: "1G"
   output: "logs/04.{rule}/{rule}.{jobid}.o"
   error: "logs/04.{rule}/{rule}.{jobid}.e"
-
 
 quantify_transcript_star:
   mem: "5G"
