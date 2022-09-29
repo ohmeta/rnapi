@@ -31,8 +31,8 @@ rule hlatyping_arcashla_extract:
         bam = os.path.join(config["output"]["align"],
                            "star/reads/{sample}/Aligned.sortedByCoord.out.bam")
     output:
-        r1 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.extracted.1.fq.gz"),
-        r2 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.extracted.2.fq.gz")
+        r1 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.HLA.1.fq.gz"),
+        r2 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.HLA.2.fq.gz")
     log:
         os.path.join(config["output"]["hlatyping"],
                      "logs/arcashla_extract/{sample}.archashla_extract.log")
@@ -42,6 +42,7 @@ rule hlatyping_arcashla_extract:
     conda:
         config["envs"]["arcashla"]
     params:
+        sample = "{sample}",
         outdir = os.path.join(config["output"]["hlatyping"], "reads/{sample}"),
         unmapped = "--unmapped" if config["params"]["hlatyping"]["arcashla"]["unmapped"] else ""
     threads:
@@ -58,14 +59,17 @@ rule hlatyping_arcashla_extract:
         --verbose \
         --log {log} \
         {input.bam}
+
+        mv {params.outdir}/Aligned.sortedByCoord.out.extracted.1.fq.gz {params.outdir}/{params.sample}.HLA.1.fq.gz
+        mv {params.outdir}/Aligned.sortedByCoord.out.extracted.2.fq.gz {params.outdir}/{params.sample}.HLA.2.fq.gz
         '''
 
 
 rule hlatyping_arcashla_genotype:
     input:
         done = os.path.join(config["output"]["hlatyping"], "config/arcasHLA_reference_done"),
-        r1 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.extracted.1.fq.gz"),
-        r2 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.extracted.2.fq.gz")
+        r1 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.HLA.1.fq.gz"),
+        r2 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.HLA.2.fq.gz")
     output:
         json = os.path.join(config["output"]["hlatyping"], "genotype/{sample}/{sample}.genotype.json")
     log:
