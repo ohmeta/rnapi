@@ -258,7 +258,7 @@ def main():
     )
     run_parser.add_argument(
         "--dry-run",
-        default=True,
+        default=False,
         dest="dry_run",
         action="store_true",
         help="dry run pipeline",
