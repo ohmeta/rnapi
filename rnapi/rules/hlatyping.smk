@@ -5,6 +5,8 @@ rule hlatyping_arcashla_reference:
         os.path.join(config["output"]["hlatyping"], "logs/arcasHLA_reference.log")
     params:
         version = config["params"]["hlatyping"]["arcashla"]["IMGTHLA_version"]
+    conda:
+        config["envs"]["arcashla"]
     shell:
         '''
         if [ ! -e {output} ];
