@@ -91,7 +91,7 @@ if config["params"]["hlatyping"]["arcashla"]["do"]:
             expand(
                 os.path.join(config["output"]["hlatyping"], "genotype/{sample}/{sample}.genotype.json"),
                 sample=SAMPLES.index.unique())
- else:   
+else:   
     rule hlatyping_arcashla_all:
         input:
 
