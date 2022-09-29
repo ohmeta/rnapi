@@ -131,12 +131,12 @@ rule align_transcriptome_star:
 
 
 if config["params"]["align"]["star"]["do"]:
-    rule align_reads_star_all:
-        input:
-            expand(
-                os.path.join(config["output"]["align"],
-                             "star/reads/{sample}/Aligned.sortedByCoord.out.bam"),
-                             sample=SAMPLES.index.unique())
+    #rule align_reads_star_all:
+    #    input:
+    #        expand(
+    #            os.path.join(config["output"]["align"],
+    #                         "star/reads/{sample}/Aligned.sortedByCoord.out.bam"),
+    #                         sample=SAMPLES.index.unique())
 
     if config["params"]["align"]["star"]["quant_mode"]["GeneCounts"]:
         rule align_genome_star_all:
@@ -166,8 +166,8 @@ if config["params"]["align"]["star"]["do"]:
             input:
 
 else:
-    rule align_reads_star_all:
-        input:
+    #rule align_reads_star_all:
+    #    input:
 
     rule align_genome_star_all:
         input:

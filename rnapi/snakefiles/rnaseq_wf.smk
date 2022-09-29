@@ -67,7 +67,7 @@ localrules: \
     trimming_all, \
     delriborna_ribodetector_all, \
     delriborna_all, \
-    align_reads_star_all, \
+    #align_reads_star_all, \
     align_genome_star_all, \
     align_transcriptome_star_all, \
     align_star_all, \
