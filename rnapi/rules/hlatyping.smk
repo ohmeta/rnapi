@@ -2,7 +2,7 @@ rule hlatyping_arcashla_reference:
     output:
         os.path.join(config["output"]["hlatyping"], "config/arcasHLA_reference_done")
     log:
-        os.path.join(config["params"]["hlatyping"]["arcashla"], "logs/arcasHLA_reference.log")
+        os.path.join(config["output"]["hlatyping"], "logs/arcasHLA_reference.log")
     params:
         version = config["params"]["hlatyping"]["arcashla"]["IMGTHLA_version"]
     shell:
