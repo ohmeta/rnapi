@@ -93,7 +93,7 @@ params:
         # count reads per gene
 
   quantify:
-    threads: 32
+    threads: 8 
     salmon:
       do: True
       index_add_genome: True
@@ -102,12 +102,21 @@ params:
       extra: "--gcBias"
 
   assembly:
-    threads: 32
+    threads: 8 
     trust4:
       do: True
       coordinate_fasta: "/home/zhujie/databases/funcgenomics/IMGT/TRUST4/Homo_sapien/human_IMGT+C.fa"
       reference_fasta: "/home/zhujie/databases/funcgenomics/IMGT/TRUST4/Homo_sapien/human_IMGT+C.fa"
 
+  hlatyping:
+    threads: 8
+    arcashla:
+      do: True
+      IMGTHLA_version: 3.46.0 # latest
+      unmapped: False
+      genes: ["DPB1", "DRB1", "DRA", "L", "K", "B", "DOB", "DRB3", "DMA", "G", "DMB", "C", "DQA1", "DOA", "F", "E", "DPA1", "DRB5", "DQB1", "H", "A", "J"]
+      # genes: ["A", "B", "C", "DPB1", "DQA1", "DQB1", "DRB1"]
+      # population: ["prior", "native_american", "asian_pacific_islander", "caucasian", "black", "hispanic"]
 
 output:
   raw: "results/00.raw"
@@ -117,6 +126,7 @@ output:
   align: "results/03.align"
   quantify: "results/04.quantify"
   assembly: "results/05.assembly"
+  hlatyping: "results/06.hlatyping"
 
 
 envs:
@@ -125,3 +135,4 @@ envs:
   delriborna: "envs/delriborna.yaml"
   align: "envs/align.yaml"
   trust4: "envs/trust4.yaml"
+  arcashla: "envs/arcashla.yaml"

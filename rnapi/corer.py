@@ -23,6 +23,7 @@ RNASEQ_WF = [
     "delriborna_ribodetector_all",
     "delriborna_report_all",
     "delriborna_all",
+    "align_reads_star_all",
     "align_genome_star_all",
     "align_transcriptome_star_all",
     "align_star_all",
@@ -37,6 +38,8 @@ RNASEQ_WF = [
     "quantification_sleuth_all",
     "assembly_xcr_trust4_all",
     "assembly_all",
+    "hlatyping_arcashla_all",
+    "hlatyping_all",
     "all"
 ]
 

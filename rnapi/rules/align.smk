@@ -29,15 +29,14 @@ rule align_reads_star:
         index = expand(os.path.join(config["reference"]["index_star"], "{file}"),
                        file=["Genome", "SA", "SAindex"])
     output:
-        align_bam = os.path.join(config["output"]["align"], "star/align/{sample}/Aligned.sortedByCoord.out.bam"),
-        gene_tab = os.path.join(config["output"]["align"], "star/align/{sample}/ReadsPerGene.out.tab")
+        bam = temp(os.path.join(config["output"]["align"], "star/reads/{sample}/Aligned.sortedByCoord.out.bam"))
     params:
         index = config["reference"]["index_star"],
-        outprefix = os.path.join(config["output"]["align"], "star/align/{sample}")
+        outprefix = os.path.join(config["output"]["align"], "star/reads/{sample}")
     threads:
         config["params"]["align"]["threads"]
     log:
-        os.path.join(config["output"]["align"], "logs/align_star/{sample}.log")
+        os.path.join(config["output"]["align"], "logs/align_reads_star/{sample}.log")
     conda:
         config["envs"]["align"]
     shell:
@@ -130,7 +129,7 @@ if config["params"]["align"]["star"]["do"]:
         input:
             expand(
                 os.path.join(config["output"]["align"],
-                             "star/genome/{sample}/Aligned.sortedByCoord.out.bam"),
+                             "star/reads/{sample}/Aligned.sortedByCoord.out.bam"),
                              sample=SAMPLES.index.unique())
 else:
     rule align_reads_star_all:

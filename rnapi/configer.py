@@ -54,7 +54,10 @@ class rnaconfig:
         "logs/04.quantify_transcript_star_merge",
         "logs/04.quantify_salmon",
         "logs/04.quantify_salmon_merge",
-        "logs/05.assembly_xcr_trust4"
+        "logs/05.assembly_xcr_trust4",
+        "logs/06.hlatyping_arcashla_reference",
+        "logs/06.hlatyping_arcashla_extract",
+        "logs/06.hlatyping_arcashla_genotype"
     ]
 
     def __init__(self, work_dir):

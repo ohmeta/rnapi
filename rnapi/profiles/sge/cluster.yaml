@@ -144,3 +144,13 @@ assembly_xcr_trust4:
   mem: "10G"
   output: "logs/05.{rule}/{rule}.{wildcards.sample}.o"
   error: "logs/05.{rule}/{rule}.{wildcards.sample}.e"
+
+hlatyping_arcashla_extract:
+  mem: "5G"
+  output: "logs/06.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/06.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
+
+hlatyping_arcashla_genotype:
+  mem: "5G"
+  output: "logs/06.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
+  error: "logs/06.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
