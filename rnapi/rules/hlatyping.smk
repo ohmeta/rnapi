@@ -57,8 +57,8 @@ rule hlatyping_arcashla_extract:
 rule hlatyping_arcashla_genotype:
     input:
         done = os.path.join(config["output"]["hlatyping"], "config/arcasHLA_reference_done"),
-        r1 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.HLA.R1.fastq.gz"),
-        r2 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.HLA.R2.fastq.gz")
+        r1 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.extracted.1.fq.gz"),
+        r2 = os.path.join(config["output"]["hlatyping"], "reads/{sample}/{sample}.extracted.2.fq.gz")
     output:
         json = os.path.join(config["output"]["hlatyping"], "genotype/{sample}/{sample}.genotype.json")
     log:
