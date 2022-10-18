@@ -106,8 +106,8 @@ params:
     threads: 8 
     trust4:
       do: True
-      coordinate_fasta: "/home/zhujie/databases/funcgenomics/IMGT/TRUST4/Homo_sapien/human_IMGT+C.fa"
-      reference_fasta: "/home/zhujie/databases/funcgenomics/IMGT/TRUST4/Homo_sapien/human_IMGT+C.fa"
+      coordinate_fasta: "/home/jiezhu/databases/funcgenomics/IMGT/TRUST4/Homo_sapien/human_IMGT+C.fa"
+      reference_fasta: "/home/jiezhu/databases/funcgenomics/IMGT/TRUST4/Homo_sapien/human_IMGT+C.fa"
 
   hlatyping:
     threads: 8
