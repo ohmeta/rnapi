@@ -86,6 +86,7 @@ params:
     threads: 8
     star:
       do: True
+      sjdboverhang: 99 # reads_len - 1
       quant_mode:
         TranscriptomeSAM: True
         # output SAM/BAM alignments to transcriptome into a separate file

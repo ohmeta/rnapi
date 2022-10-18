@@ -6,7 +6,8 @@ rule index_star:
         expand(os.path.join(config["reference"]["index_star"], "{file}"),
                file=["Genome",  "SA", "SAindex"])
     params:
-        index = config["reference"]["index_star"]
+        index = config["reference"]["index_star"],
+        sjdboverhang = config["params"]["align"]["star"]["sjdboverhang"]
     threads:
         config["params"]["align"]["threads"]
     log:
@@ -26,7 +27,7 @@ rule index_star:
         --genomeDir {params.index} \
         --genomeFastaFiles {params.index}/genome.fasta \
         --sjdbGTFfile {input.gtf} \
-        --sjdbOverhang 100 \
+        --sjdbOverhang {params.sjdboverhang} \
         > {log} 2>&1
 
         rm -rf {params.index}/genome.fasta
