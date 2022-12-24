@@ -299,7 +299,7 @@ Real running cmd:
 snakemake --snakefile /home/jiezhu/toolkit/rnapi/rnapi/snakefiles/rnaseq_wf.smk --configfile ./config.yaml --cores 32 --until all --rerun-incomplete --keep-going --printshellcmds --reason --dry-run
 ```
 
-#### Step 6: run rnaseq_wf locally or remotely
+#### Step 6: run rnaseq_wf local or remote
 
 ```bash
 ➤ python /path/to/rnapi/run_rnapi.py rnaseq_wf all \
@@ -310,7 +310,7 @@ snakemake --snakefile /home/jiezhu/toolkit/rnapi/rnapi/snakefiles/rnaseq_wf.smk 
 
 # or
 ➤ python /path/to/rnapi/run_rnapi.py rnaseq_wf all 
-  --dry-remote \
+  --run-remote \
   --use-conda \
   --local-cores 8 \
   --cores 320 \
