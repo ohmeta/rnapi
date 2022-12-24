@@ -309,7 +309,7 @@ snakemake --snakefile /home/jiezhu/toolkit/rnapi/rnapi/snakefiles/rnaseq_wf.smk 
   --jobs 5
 
 # or
-➤ python /path/to/rnapi/run_rnapi.py rnaseq_wf all 
+➤ python /path/to/rnapi/run_rnapi.py rnaseq_wf all \
   --run-remote \
   --use-conda \
   --local-cores 8 \
