@@ -1,6 +1,6 @@
 # Transcriptome analysis pipeline from RNA-seq data
 
-<div align=center><img width="500" height="200" src="docs/dag.svg"/></div>
+<div align=center><img width="800" height="200" src="docs/dag.svg"/></div>
 
 ## Feature
 
