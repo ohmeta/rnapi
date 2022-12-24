@@ -321,4 +321,4 @@ snakemake --snakefile /home/jiezhu/toolkit/rnapi/rnapi/snakefiles/rnaseq_wf.smk 
 
 + If you run rnapi at SLURM/SGE system, you may need to edit _profiles/slurm/cluster.yaml_ or _profiles/sge/cluster.yaml_ at your working folder to update the resources requirement
 
-+ rnapi reply snakemake to use conda/mamba to create enviroments automatically, so basically you only need snakemake installed at your working environment, then when run pipeline, just specific **--use-conda** parameter, the required will be installed by conda/mamba accorading to the _envs/*.yaml_. If you want to used different software version, just edit _envs/*.yaml_
++ rnapi reply snakemake to use conda/mamba to create enviroments automatically, so basically you only need snakemake installed at your working environment, then when run pipeline, just specific **--use-conda** parameter, then the softwares required by rnapi will be installed by conda/mamba accorading to the _envs/*.yaml_ files. If you want to used different software version, just edit _envs/*.yaml_ and update it
