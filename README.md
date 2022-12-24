@@ -252,7 +252,7 @@ envs:
   arcashla: /home/jiezhu/toolkit/rnapi/test/envs/arcashla.yaml
 ```
 
-#### Step 5: run rnaseq_wf
+#### Step 5: dry-run rnaseq_wf
 
 ```bash
 ➤ python /path/to/rnapi/run_rnapi.py rnaseq_wf all --dry-run
@@ -298,3 +298,27 @@ This was a dry-run (flag -n). The order of jobs does not reflect the order of ex
 Real running cmd:
 snakemake --snakefile /home/jiezhu/toolkit/rnapi/rnapi/snakefiles/rnaseq_wf.smk --configfile ./config.yaml --cores 32 --until all --rerun-incomplete --keep-going --printshellcmds --reason --dry-run
 ```
+
+#### Step 6: run rnaseq_wf locally or remotely
+
+```bash
+➤ python /path/to/rnapi/run_rnapi.py rnaseq_wf all \
+  --run-local \
+  --use-conda \
+  --local-cores 42 \
+  --jobs 5
+
+# or
+➤ python /path/to/rnapi/run_rnapi.py rnaseq_wf all 
+  --dry-remote \
+  --use-conda \
+  --local-cores 8 \
+  --cores 320 \
+  --jobs 40
+```
+
+#### **Note**
+
++ If you run rnapi at SLURM/SGE system, you may need to edit _profiles/slurm/cluster.yaml-* or *-profiles/sge/cluster.yaml_ at your working folder to update the resources requirement
+
++ rnapi reply snakemake to use conda/mamba to create enviroments automatically, so basically you only need snakemake installed at your working environment, then when run pipeline, just specific **--use-conda** parameter, the required will be installed by conda/mamba accorading to the _envs/*.yaml_. If you want to used different software version, just edit _envs/*.yaml_
