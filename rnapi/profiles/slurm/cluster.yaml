@@ -92,7 +92,7 @@ delriborna_ribodetector:
   #cpus-per-task: 8 # same with config.yaml
   #threads-per-core: 1
 
-  mem: "20G"
+  mem: "10G"
   output: "logs/02.{rule}/{rule}.{wildcards.sample}.{jobid}.o"
   error: "logs/02.{rule}/{rule}.{wildcards.sample}.{jobid}.e"
 
