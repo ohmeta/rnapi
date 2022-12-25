@@ -1,7 +1,10 @@
 channels:
+  - pytorch
+  - nvidia
   - conda-forge
   - bioconda
   - defaults
 dependencies:
   - pigz
   - ribodetector=0.2.7
+  - pytorch=1.13.1=*cuda11.7*

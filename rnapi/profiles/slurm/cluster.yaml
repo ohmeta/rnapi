@@ -84,9 +84,9 @@ trimming_report_merge:
 
 delriborna_ribodetector:
   # GPU mode
-  # qos: "gpu"
-  # partition: "gpu"
-  # gres: "gpu:1"
+  qos: "gpu"
+  partition: "gpu"
+  gres: "gpu:1"
 
   # CPU mode
   #cpus-per-task: 8 # same with config.yaml
