@@ -75,7 +75,7 @@ params:
       GPU: True
       reads_len: 100
       chunk_size: 256 # control memory usage when using CPU
-      extra: "--memory 12" # only work for GPU
+      extra: "\"--memory 12\"" # only work for GPU
 
   qcreport:
     do: True
@@ -94,7 +94,7 @@ params:
         # count reads per gene
 
   quantify:
-    threads: 8 
+    threads: 8
     salmon:
       do: True
       index_add_genome: True
@@ -103,7 +103,7 @@ params:
       extra: "--gcBias"
 
   assembly:
-    threads: 8 
+    threads: 8
     trust4:
       do: True
       coordinate_fasta: "/home/jiezhu/databases/funcgenomics/IMGT/TRUST4/Homo_sapien/human_IMGT+C.fa"
