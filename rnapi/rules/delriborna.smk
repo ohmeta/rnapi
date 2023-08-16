@@ -23,7 +23,6 @@ rule delriborna_ribodetector:
                else "ribodetector_cpu",
         length = config["params"]["delriborna"]["ribodetector"]["reads_len"],
         chunk_size = config["params"]["delriborna"]["ribodetector"]["chunk_size"],
-        extra = " ".join(config["params"]["delriborna"]["ribodetector"]["extra"]),
         outdir = os.path.join(config["output"]["delriborna"], "short_reads/{sample}")
     log:
         os.path.join(config["output"]["delriborna"], "logs/{sample}.ribodetector.log")
@@ -57,7 +56,6 @@ rule delriborna_ribodetector:
         --rrna $rna1 $rna2 \
         --chunk_size {params.chunk_size} \
         --threads {threads} \
-        {params.extra} \
         > {log} 2>&1
 
         pigz -p {threads} $out1 >> {log} 2>&1
