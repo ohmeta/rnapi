@@ -23,7 +23,7 @@ rule delriborna_ribodetector:
                else "ribodetector_cpu",
         length = config["params"]["delriborna"]["ribodetector"]["reads_len"],
         chunk_size = config["params"]["delriborna"]["ribodetector"]["chunk_size"],
-        extra = config["params"]["delriborna"]["ribodetector"]["extra"],
+        extra = " ".join(config["params"]["delriborna"]["ribodetector"]["extra"]),
         outdir = os.path.join(config["output"]["delriborna"], "short_reads/{sample}")
     log:
         os.path.join(config["output"]["delriborna"], "logs/{sample}.ribodetector.log")
