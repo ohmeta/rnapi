@@ -12,7 +12,7 @@ rule delriborna_ribodetector:
         reads = expand(os.path.join(
             config["output"]["delriborna"],
             "short_reads/{{sample}}/{{sample}}.nonrrna.{read}.fq.gz"),
-                       read=["1", "2"]),
+            read=["1", "2"]),
         reads_rrna = expand(os.path.join(
             config["output"]["delriborna"],
             "short_reads/{{sample}}/{{sample}}.rrna.{read}.fq.gz"),
@@ -20,15 +20,19 @@ rule delriborna_ribodetector:
     params:
         ribodetector = "ribodetector" \
             if config["params"]["delriborna"]["ribodetector"]["GPU"] \
-               else "ribodetector_cpu",
+            else "ribodetector_cpu",
         length = config["params"]["delriborna"]["ribodetector"]["reads_len"],
         chunk_size = config["params"]["delriborna"]["ribodetector"]["chunk_size"],
+        gpu_memory = "--memory " + str(config["params"]["delriborna"]["ribodetector"]["gpu_memory"]) \
+            if config["params"]["delriborna"]["ribodetector"]["GPU"] \
+            else "",
         outdir = os.path.join(config["output"]["delriborna"], "short_reads/{sample}")
     log:
         os.path.join(config["output"]["delriborna"], "logs/{sample}.ribodetector.log")
     benchmark:
-        os.path.join(config["output"]["delriborna"],
-                     "benchmark/ribodetector/{sample}.ribodetector.benchmark.txt")
+        os.path.join(
+            config["output"]["delriborna"],
+            "benchmark/ribodetector/{sample}.ribodetector.benchmark.txt")
     threads:
         config["params"]["delriborna"]["threads"]
     conda:
@@ -56,6 +60,7 @@ rule delriborna_ribodetector:
         --rrna $rna1 $rna2 \
         --chunk_size {params.chunk_size} \
         --threads {threads} \
+        {params.gpu_memory} \
         > {log} 2>&1
 
         pigz -p {threads} $out1 >> {log} 2>&1
