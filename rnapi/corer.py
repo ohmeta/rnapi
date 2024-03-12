@@ -27,15 +27,11 @@ RNASEQ_WF = [
     "align_genome_star_all",
     "align_transcriptome_star_all",
     "align_star_all",
-    "align_hisat2_all",
     "align_all",
     "quantify_gene_star_all",
     "quantify_transcript_star_all",
+    "quantify_salmon_all",
     "quantify_all",
-    "pseudo_align_salmon_all",
-    "pseudo_align_kallisto_all",
-    "quantification_salmon_all",
-    "quantification_sleuth_all",
     "assembly_xcr_trust4_all",
     "assembly_all",
     "hlatyping_arcashla_all",
@@ -76,7 +72,6 @@ def run_snakemake(args, unknown, snakefile, workflow):
             "--rerun-incomplete",
             "--keep-going",
             "--printshellcmds",
-            "--reason",
         ]
 
         if args.use_conda:

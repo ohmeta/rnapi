@@ -1,32 +1,32 @@
 reference:
   # dna: /home/jiezhu/databases/ensembl/release_104/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
   # dna: /home/jiezhu/databases/ensembl/release_104/fasta/homo_sapiens/dna/Homo_sapiens.GRCh38.dna.primary_assembly.fa.gz
-  # dna: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M28/GRCm39.primary_assembly.genome.fa.gz
+  # dna: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M34/GRCm39.primary_assembly.genome.fa.gz
   dna: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_39/GRCh38.primary_assembly.genome.fa.gz
 
   # cdna: /home/jiezhu/databases/ensembl/release_104/fasta/mus_musculus/cdna/Mus_musculus.GRCm39.cdna.all.fa.gz
   # cdna: /home/jiezhu/databases/ensembl/release_104/fasta/homo_sapiens/cdna/Homo_sapiens.GRCh38.cdna.all.fa.gz
-  # cdna: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M28/gencode.vM28.transcripts.fa.gz
+  # cdna: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M34/gencode.vM34.transcripts.fa.gz
   cdna: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_39/gencode.v39.transcripts.fa.gz
 
   # gtf: /home/jiezhu/databases/ensembl/release_104/gtf/mus_musculus/Mus_musculus.GRCm39.104.gtf
   # gtf: /home/jiezhu/databases/ensembl/release_104/gtf/homo_sapiens/Homo_sapiens.GRCh38.104.gtf
-  # gtf: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M28/gencode.vM28.primary_assembly.annotation.gtf
+  # gtf: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M34/gencode.vM34.primary_assembly.annotation.gtf
   gtf: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_39/gencode.v39.primary_assembly.annotation.gtf
 
   # index_rsem: /home/jiezhu/databases/ensembl/release_104/fasta/mus_musculus/dna_index/index_rsem/mus_musculus
   # index_rsem: /home/jiezhu/databases/ensembl/release_104/fasta/homo_sapiens/dna_index/index_rsem/homo_sapiens
-  # index_rsem: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M28/index_rsem/mus_musculus
+  # index_rsem: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M34/index_rsem/mus_musculus
   index_rsem: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_39/index_rsem/homo_sapiens
 
   # index_star: /home/jiezhu/databases/ensembl/release_104/fasta/mus_musculus/dna_index/index_star
   # index_star: /home/jiezhu/databases/ensembl/release_104/fasta/homo_sapiens/dna_index/index_star
-  # index_star: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M28/index_star
+  # index_star: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M34/index_star
   index_star: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_39/index_star
 
   # index_salmon: /home/jiezhu/databases/ensembl/release_104/fasta/mus_musculus/cdna_index/index_salmon
   # index_salmon: /home/jiezhu/databases/ensembl/release_104/fasta/homo_sapiens/cdna_index/index_salmon
-  # index_salmon: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M28/index_salmon
+  # index_salmon: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_mouse/release_M34/index_salmon
   index_salmon: /home/jiezhu/databases/ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_39/index_salmon
 
 
